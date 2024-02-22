@@ -1,13 +1,13 @@
 'use client'
 
 import React from 'react'
+import { styled } from 'styled-components'
 import Board from '@/app/component/Board'
 import boardData from "../../public/api/boardData"
 
 export default function Page() {
     return (
         <>
-            <h1>Hello, Next.js!</h1>
             <ul>
                 {boardData.map((data, index) => (
                     <Board
@@ -23,3 +23,9 @@ export default function Page() {
         </>
     )
 }
+
+const UserBoardContainer = styled.ul`
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+`
