@@ -1,4 +1,7 @@
-import '../app/ui/globals.css'
+'use client'
+
+import React from 'react'
+import { Reset } from 'styled-reset'
 
 export default function RootLayout({
     children,
@@ -7,6 +10,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
+            <Reset/>
         <body>{children}</body>
         </html>
     );
