@@ -13,7 +13,7 @@ const COMMENTDATA = [
         title: "안녕하세요!",
         isLiked: false,
         likedCount: 10,
-        upLoadedImage: ['01', '02', '03']
+        upLoadedImage: ['02']
     },
     {
         userId: 234567,
@@ -21,7 +21,7 @@ const COMMENTDATA = [
         title: "안녕하세요 여러분!",
         isLiked: true,
         likedCount: 20,
-        upLoadedImage: ['01', '02', '03']
+        upLoadedImage: ['03']
     },
     {
         userId: 333444,
@@ -29,7 +29,7 @@ const COMMENTDATA = [
         title: "Hello everyone!",
         isLiked: false,
         likedCount: 12,
-        upLoadedImage: ['01', '02', '03']
+        upLoadedImage: ['01']
     },
     {
         userId: 555555,
@@ -37,7 +37,7 @@ const COMMENTDATA = [
         title: "Nice to meet you!",
         isLiked: false,
         likedCount: 15,
-        upLoadedImage: ['01', '02', '03']
+        upLoadedImage: ['02']
     },
     {
         userId: 777888,
@@ -45,7 +45,7 @@ const COMMENTDATA = [
         title: "Greetings, humans!",
         isLiked: false,
         likedCount: 5,
-        upLoadedImage: ['01', '02', '03']
+        upLoadedImage: ['03']
     },
     {
         userId: 789012,
@@ -53,7 +53,7 @@ const COMMENTDATA = [
         title: "Hello, World!",
         isLiked: true,
         likedCount: 7,
-        upLoadedImage: ['01', '02', '03']
+        upLoadedImage: ['11']
     },
     {
         userId: 888999,
@@ -61,7 +61,7 @@ const COMMENTDATA = [
         title: "Nice day for a mockup!",
         isLiked: true,
         likedCount: 28,
-        upLoadedImage: ['01', '02', '03']
+        upLoadedImage: ['22']
     },
     {
         userId: 950303,
@@ -69,7 +69,7 @@ const COMMENTDATA = [
         title: "NEXT.js 시작!",
         isLiked: true,
         likedCount: 25,
-        upLoadedImage: ['01', '02', '03']
+        upLoadedImage: ['33']
     },
     {
         userId: 987654,
@@ -77,7 +77,7 @@ const COMMENTDATA = [
         title: "오늘 날씨가 참 좋네요!",
         isLiked: false,
         likedCount: 3,
-        upLoadedImage: ['01', '02', '03']
+        upLoadedImage: ['04']
     },
 
 ];

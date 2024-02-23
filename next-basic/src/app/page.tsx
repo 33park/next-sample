@@ -17,6 +17,7 @@ export default function Page() {
                         title={data.title}
                         isLiked={data.isLiked}
                         likedCount={data.likedCount}
+                        upLoadedImage={data.upLoadedImage}
                     />
                 ))}
             </ul>
