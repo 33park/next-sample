@@ -28,10 +28,12 @@ export default function Board({ userId, userName, title, isLiked, likedCount, up
                         ))}
                     </ImageWrapper>
                 </ImageContainer>
-                <AlignCenter>
-                    <Heart fill={isLiked ? 'gray' : 'red'} stroke={`transparent`}/>
+                <RightCenter>
+                    <LikedIcon>
+                        <Heart fill={isLiked ? 'gray' : 'red'} stroke={`transparent`}/>
+                    </LikedIcon>
                     <span>{likedCount}</span>
-                </AlignCenter>
+                </RightCenter>
                 <p>{title}</p>
             </UserBox>
     )
@@ -42,11 +44,24 @@ const AlignCenter = styled.p`
     display: flex;
     align-items: center;
 `
+const RightCenter = styled.p`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+`
+
 const UserBox = styled.li`
     flex:1;
     display: inline-flex;
     flex-direction: column;
-    width: 33.3%;
+    width: calc((100% - 20px) / 3);
+    padding: 10px 0;
+    margin: 0 10px 20px 0;
+    border-top: 1px solid #eee;
+    
+    &:nth-child(3n){
+        margin-right: 0;
+    }
 `
 const UserIcon = styled.img`
     width: 50px;
@@ -88,3 +103,16 @@ const ThumbnailImage = styled.img`
     height: 100%;
     object-fit: cover;
 `
+
+const LikedIcon = styled.i`
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+
+    svg{
+        width: 100%;
+        height: auto;
+    }
+`
+
