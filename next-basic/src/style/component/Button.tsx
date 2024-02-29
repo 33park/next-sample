@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled,css } from 'styled-components'
-import { ColorType } from '../styles/theme'
+import { ColorType, theme } from '../styles/theme'
 
 
 export interface ButtonProps {
@@ -52,12 +52,8 @@ const sizeStyles = css<SizeType>`
 
 const Wrapper = styled.div<StyleType>`
     color: ${({ theme, color }) => color || theme.colors.black};
-    background-color: ${({ bgColor }) => bgColor};
+    background-color: ${({ bgColor }) => bgColor || theme.colors.gray};
     ${sizeStyles};
     cursor: pointer;
     box-sizing: border-box;
-    &:hover {
-        background-color: ${({ theme }) => theme.colors.gray};
-        border: 1px solid ${({ theme }) => theme.colors.dark};
-    }
 `
