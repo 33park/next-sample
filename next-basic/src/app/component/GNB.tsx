@@ -3,6 +3,10 @@
 import React from 'react'
 import { styled } from 'styled-components'
 import Link from 'next/link'
+import { theme } from '../../style/styles/theme'
+import { AlignLeft } from 'lucide-react'
+import { flexBox } from  '../../style/styles/common'
+import CustomButton from '../../style/component/Button'
 
 interface NavItem {
     link: string;
@@ -19,11 +23,14 @@ export default function GNB() {
 
     return (
         <GNBWrapper>
+            <MenuButton bgColor={theme.colors.primary}>
+                <AlignLeft style={{color:theme.colors.light}}/>
+            </MenuButton>
             {navItems.map((item, index) => (
                 <GnbItem key={index}>
-                    <Link href={item.link}>
-                        <LinkItem>{item.text}</LinkItem>
-                    </Link>
+                    <LinkItem href={item.link}>
+                        {item.text}
+                    </LinkItem>
                 </GnbItem>
             ))}
         </GNBWrapper>
@@ -31,27 +38,21 @@ export default function GNB() {
 }
 
 const GNBWrapper = styled.ul`
-    display: flex;
-    padding: 10px 16px;
-    border-bottom: 1px solid black;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+`
+const MenuButton = styled(CustomButton)`
+    ${flexBox({justify:'center'})}
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.2rem;
+    border:none;
 `
 
 const GnbItem = styled.li`
-    flex:none;
-    display: inline-block;
-    margin-right: 10px;
-    
-    &:last-child{
-        margin-right: 0;
-    }
 `
 
-const LinkItem = styled.a`
-    display: inline-block;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: lightgray;
-    &:hover{
-        color: black;
-    }
+const LinkItem = styled(Link)`
+
 `
