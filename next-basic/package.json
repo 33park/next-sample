@@ -36,6 +36,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "eslint-config-prettier": "^8.5.0",
+    "file-loader": "^6.2.0",
     "postcss": "^8.4.25",
     "prettier": "^2.8.8",
     "typescript": "^5"

@@ -1,7 +1,37 @@
 import { createGlobalStyle } from "styled-components";
+import NotoSansKrRegular from "../../public/fonts/NotoSans-Regular.woff2"
+import NotoSansKrMedium from "../../public/fonts/NotoSans-Medium.woff2"
+import NotoSansKrBold from "../../public/fonts/NotoSans-Bold.woff2"
+import NotoSansKrBlack from "../../public/fonts/NotoSans-Black.woff2"
 
 export const GlobalStyles = createGlobalStyle`
+    @font-face {
+        font-family: "Noto Sans Korean";
+        font-weight: 400;
+        font-style: normal;
+        src: local("Noto Sans Korean") url(${NotoSansKrRegular}) format('woff');
+    }
+    @font-face {
+        font-family: "Noto Sans Korean";
+        font-weight: 500;
+        font-style: normal;
+        src: local("Noto Sans Korean") url(${NotoSansKrMedium}) format('woff');
+    }
+    @font-face {
+        font-family: "Noto Sans Korean";
+        font-weight: 700;
+        font-style: normal;
+        src: local("Noto Sans Korean") url(${NotoSansKrBold}) format('woff');
+    }
+    @font-face {
+        font-family: "Noto Sans Korean";
+        font-weight: 900;
+        font-style: normal;
+        src: local("Noto Sans Korean") url(${NotoSansKrBlack}) format('woff');
+    }
+
     html,body {
+        font-family: "Noto Sans Korean", sans-serif;
         font-size: 62.5%;
     }
     button {
@@ -35,7 +65,8 @@ export const GlobalStyles = createGlobalStyle`
     }
     a:hover, a:visited, a:link, a:active
     {
-        color:inherit;
+        font-family: inherit;
+        color: inherit;
         text-decoration: none;
     }
 `

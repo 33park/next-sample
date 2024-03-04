@@ -9,9 +9,3 @@ export default function Page() {
         </>
     )
 }
-
-const UserBoardContainer = styled.ul`
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-`
