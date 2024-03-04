@@ -14,8 +14,8 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-    { link: '/', text: 'home' },
-    { link: '/board', text: 'board' }
+    { link: '/', text: '메인' },
+    { link: '/board', text: '게시판 샘플' }
 ]
 
 
@@ -31,9 +31,6 @@ export default function GNB() {
 
     return (
         <>
-            <MenuButton onClick={()=>toggleMenu()}>
-                <AlignLeft style={{color:theme.colors.light}}/>
-            </MenuButton>
             <GnbList className={menubar ? 'open' : ''}>
                 {navItems.map((item, index) => (
                     <GnbItem key={index}>
@@ -43,6 +40,9 @@ export default function GNB() {
                     </GnbItem>
                 ))}
             </GnbList>
+            <MenuButton onClick={()=>toggleMenu()}>
+                <AlignLeft style={{color:theme.colors.light}}/>
+            </MenuButton>
         </>
     )
 }
@@ -60,16 +60,23 @@ const MenuButton = styled(CustomButton)`
 `
 const GnbList = styled.ul`
     position: fixed;
-    top: 6rem;
+    top: 0;
     left: -100%;
+    width: 10vw;
+    padding: 6rem 1rem;
+    background-color: ${theme.colors.primary};
     transition: left 0.3s ease-in-out;
 
     &.open{
-        left: 1rem;
+        left: 0;
     }
 `
 
 const GnbItem = styled.li`
+    padding-left: 1rem;
+    line-height: 1.45;
+    font-size:1.4rem;
+    color: ${theme.colors.white};
 `
 
 const LinkItem = styled(Link)`
