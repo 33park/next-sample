@@ -8,6 +8,7 @@ import { Menu  as LeftMenuIcon } from 'lucide-react'
 import { flexBox } from  '../../style/styles/common'
 import CustomButton from '../../style/component/Button'
 
+
 interface NavItem {
     link: string;
     text: string;
@@ -73,8 +74,8 @@ const GnbList = styled.ul`
     position: fixed;
     top: 0;
     left: -100%;
-    width: 15vw;
-    max-width: 16rem;
+    /* width: 15vw; */
+    /* max-width: 16rem; */
     height: 100vh;
     padding: 8rem 1rem 4rem;
     background-color: ${theme.colors.primary};
@@ -87,7 +88,8 @@ const GnbList = styled.ul`
 
 const GnbItem = styled.li`
     padding-left: 1rem;
-    font-size:1.4rem;
+    /* font-size:1.4rem; */
+    font-size:48px;
     
     a {
         display: inline-block;

@@ -8,7 +8,6 @@ import { GlobalStyles } from '../style/GlobalStyles'
 import { theme } from '../style/styles/theme'
 
 
-
 export default function RootLayout({
     children,
     }: {
@@ -19,6 +18,7 @@ export default function RootLayout({
             <ThemeProvider theme={theme}>
                 <html lang="ko">
                     <Reset/>
+                    <FontStyles/>
                     <GlobalStyles/>
                     <body>
                         <GlobalNavigator/>
