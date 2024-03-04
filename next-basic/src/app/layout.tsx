@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components'
 import GlobalNavigator from './component/GNB'
 import { GlobalStyles } from '../style/GlobalStyles'
 import { theme } from '../style/styles/theme'
+import GlobalFonts from "../fonts/fonts"
 
 
 
@@ -20,6 +21,7 @@ export default function RootLayout({
                 <html lang="ko">
                     <Reset/>
                     <GlobalStyles/>
+                    <GlobalFonts/>
                     <body>
                         <GlobalNavigator/>
                         {children}

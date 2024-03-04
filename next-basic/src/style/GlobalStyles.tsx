@@ -1,35 +1,6 @@
 import { createGlobalStyle } from "styled-components";
-import NotoSansKrRegular from "../fonts/NotoSans-Regular.woff"
-import NotoSansKrMedium from "../fonts/NotoSans-Medium.woff"
-import NotoSansKrBold from "../fonts/NotoSans-Bold.woff"
-import NotoSansKrBlack from "../fonts/NotoSans-Black.woff"
 
 export const GlobalStyles = createGlobalStyle`
-    @font-face {
-        font-family: "Noto Sans Korean";
-        font-weight: 400;
-        font-style: normal;
-        src: url(${NotoSansKrRegular}) format('woff')
-    }
-    @font-face {
-        font-family: "Noto Sans Korean";
-        font-weight: 500;
-        font-style: normal;
-        src: url(${NotoSansKrMedium}) format('woff')
-    }
-    @font-face {
-        font-family: "Noto Sans Korean";
-        font-weight: 700;
-        font-style: normal;
-        src: url(${NotoSansKrBold}) format('woff')
-    }
-    @font-face {
-        font-family: "Noto Sans Korean";
-        font-weight: 900;
-        font-style: normal;
-        src: url(${NotoSansKrBlack}) format('woff')
-    }
-
     html,body {
         font-size: 62.5%;
     }
