@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React,{useRef, useState} from 'react'
 import { styled } from 'styled-components'
 import { Heart, MoreHorizontal  } from 'lucide-react';
 import { flexBox } from '@/style/styles/common';
@@ -6,19 +8,22 @@ import { flexBox } from '@/style/styles/common';
 interface BoardProps {
     userId: number;
     userName: string;
-    title: string;
+    content: string;
     isLiked: boolean;
     likedCount: number;
     upLoadedImage: string[];
+    onLikeToggle: () => void;
 }
 
-export default function Board({ userId, userName, title, isLiked, likedCount, upLoadedImage }: BoardProps ) {
+
+export default function Instargram({ userId, userName, content, isLiked, likedCount, upLoadedImage, onLikeToggle }: BoardProps ) {
+
     return (
             <UserBox>
                 <UserUtil>
                     <AlignCenter>
                         <UserIcon src={`/images/user/icon/${userId}.jpg`} alt={userName} width={50} height={50}/>
-                        <span>{userName}({userId})</span>
+                        <span>{userName}</span>
                     </AlignCenter>
                     <button type="button"><MoreHorizontal /></button>
                 </UserUtil>
@@ -33,12 +38,12 @@ export default function Board({ userId, userName, title, isLiked, likedCount, up
                     </ImageWrapper>
                 </ImageContainer>
                 <RightCenter>
-                    <LikedIcon>
+                    <LikedIcon onClick={onLikeToggle}>
                         <Heart fill={isLiked ? 'gray' : 'red'} stroke={`transparent`}/>
                     </LikedIcon>
                     <span>{likedCount}</span>
                 </RightCenter>
-                <p>{title}</p>
+                <UserComment><strong>{userId}</strong>{content}</UserComment>
             </UserBox>
     )
 }
@@ -109,10 +114,21 @@ const LikedIcon = styled.i`
     width: 24px;
     height: 24px;
     margin-right: 4px;
+    cursor: pointer;
 
     svg{
         width: 100%;
         height: auto;
     }
 `
-
+const UserComment = styled.p`
+    line-height: 1.25;
+    strong {
+        display: inline-block;
+        margin-right: .4rem;
+        font-weight: bold;
+    }
+    span {
+        font-size: 0.9em;
+    }
+`
