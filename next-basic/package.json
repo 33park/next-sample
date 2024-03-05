@@ -13,6 +13,7 @@
     "eslint:fix": "eslint  \"src/**/*.{js,jsx,ts,tsx}\" --fix"
   },
   "dependencies": {
+    "@next/font": "^14.1.2",
     "autoprefixer": "^10.4.17",
     "axios": "^1.4.0",
     "clsx": "^2.1.0",

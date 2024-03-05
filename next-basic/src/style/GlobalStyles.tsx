@@ -1,9 +1,12 @@
 import { createGlobalStyle } from "styled-components";
+import '../../public/fonts/noto-sans-korean.css';
 
 export const GlobalStyles = createGlobalStyle`
+
     html,body {
-        font-size: 62.5%;
+        font-family: "Noto Sans Korean",sans-serif;
         font-weight: 400;
+        font-size: 62.5%;
     }
     button {
         border: none;
@@ -36,7 +39,6 @@ export const GlobalStyles = createGlobalStyle`
     }
     a:hover, a:visited, a:link, a:active
     {
-        font-family: inherit;
         color: inherit;
         text-decoration: none;
     }

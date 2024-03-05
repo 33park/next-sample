@@ -1,6 +1,7 @@
 import React from 'react'
 import { styled } from 'styled-components'
-import { Heart } from 'lucide-react';
+import { Heart, MoreHorizontal  } from 'lucide-react';
+import { flexBox } from '@/style/styles/common';
 
 interface BoardProps {
     userId: number;
@@ -14,10 +15,13 @@ interface BoardProps {
 export default function Board({ userId, userName, title, isLiked, likedCount, upLoadedImage }: BoardProps ) {
     return (
             <UserBox>
-                <AlignCenter>
-                    <UserIcon src={`/images/user/icon/${userId}.jpg`} alt={userName} width={50} height={50}/>
-                    <span>{userName}({userId})</span>
-                </AlignCenter>
+                <UserUtil>
+                    <AlignCenter>
+                        <UserIcon src={`/images/user/icon/${userId}.jpg`} alt={userName} width={50} height={50}/>
+                        <span>{userName}({userId})</span>
+                    </AlignCenter>
+                    <button type="button"><MoreHorizontal /></button>
+                </UserUtil>
                 <ImageContainer>
                     <ImageWrapper>
                         {/* 타입스크립트가 image, index에 대한 명시적 타입 */}
@@ -39,43 +43,39 @@ export default function Board({ userId, userName, title, isLiked, likedCount, up
     )
 }
 
-
+const UserUtil = styled.div`
+    ${flexBox({justify:'space-between'})}
+`
 const AlignCenter = styled.p`
-    display: flex;
-    align-items: center;
+    ${flexBox()}
 `
 const RightCenter = styled.p`
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    ${flexBox({justify:'flex-end'})}
 `
 
 const UserBox = styled.li`
     flex:1;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
-    width: calc((100% - 20px) / 3);
+    width: 100%;
     padding: 10px 0;
-    margin: 0 10px 20px 0;
+    margin: 0 0 20px;
     border-top: 1px solid #eee;
-    
-    &:nth-child(3n){
-        margin-right: 0;
-    }
+    font-size: 1.6rem;
 `
 const UserIcon = styled.img`
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: 4.8rem;
     object-fit: cover;
-    margin-right: 4px;
+    margin-right: .4rem;
 `
 const ImageContainer = styled.div`
     position: relative;
     display: block;
     width: 100%;
     height: 0;
-    margin: 10px 0;
+    margin: 1rem 0;
     padding-bottom: 100%;
     overflow: hidden;
 `

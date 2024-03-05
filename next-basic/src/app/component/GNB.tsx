@@ -4,10 +4,9 @@ import React,{ useRef, useState, useEffect} from 'react'
 import { styled } from 'styled-components'
 import Link from 'next/link'
 import { theme } from '../../style/styles/theme'
-import { Menu  as LeftMenuIcon } from 'lucide-react'
+import { Menu  as LeftMenuIcon, Github, Rss, Mail, Phone } from 'lucide-react'
 import { flexBox } from  '../../style/styles/common'
 import CustomButton from '../../style/component/Button'
-
 
 interface NavItem {
     link: string;
@@ -29,18 +28,20 @@ export default function GNB() {
         setMenubar(menubar => !menubar);
     }
 
-    const handleOutsideClick= (event) => {
-        if(!menuRef.current || !menuRef.current.contains(event.target)){
+    const handleOutsideClick= (event:any) => {
+        if (menubar && menuRef.current && !menuRef.current.contains(event.target)) {
             toggleMenu();
         }
     }
 
     useEffect(() => {
-        document.addEventListener('click', handleOutsideClick);
+        if (menubar) {
+            document.addEventListener('click', handleOutsideClick);
+        }
         return () => {
-          document.removeEventListener('click', handleOutsideClick);
+            document.removeEventListener('click', handleOutsideClick);
         };
-      }, []);
+    }, [menubar]);
 
     return (
         <div ref={menuRef}>
@@ -52,44 +53,55 @@ export default function GNB() {
                         </Link>
                     </GnbItem>
                 ))}
+                <GnbItem>
+                    <Github/>
+                    <Rss/>
+                    <Mail/>
+                    <Phone/>
+                </GnbItem>
             </GnbList>
-            <MenuButton onClick={()=>toggleMenu()} style={menubar ? { 'background-color':theme.colors.white} : {'background-color':theme.colors.primary}}>
-                <LeftMenuIcon style={menubar ? { color:theme.colors.primary} : {color:theme.colors.white}}/>
+            <MenuButton onClick={toggleMenu} menubar={menubar.toString()}>
+                <LeftMenuIcon style={{ color: menubar ? theme.colors.primary : theme.colors.white }} />
             </MenuButton>
+
+
         </div>
     )
 }
-
-const MenuButton = styled(CustomButton)`
+                                                            //{...rest}는 나머지 (props)를 의미
+const MenuButton = styled(({ menubar, ...rest }) => <CustomButton {...rest} />)<{ menubar: string }>`
     position: fixed;
     top: 2rem;
-    left: 2rem;
+    right: 2rem;
     ${flexBox({justify:'center'})}
     width: 4rem;
     height: 4rem;
+    background-color: ${({ menubar }) => menubar === 'true' ? theme.colors.white : theme.colors.primary};
     border-radius: 0.2rem;
     border:none;
+    z-index: 1;
 `
+
 const GnbList = styled.ul`
     position: fixed;
     top: 0;
-    left: -100%;
-    /* width: 15vw; */
-    /* max-width: 16rem; */
+    right: -100%;
+    width: 15vw;
+    max-width: 16rem;
     height: 100vh;
     padding: 8rem 1rem 4rem;
     background-color: ${theme.colors.primary};
-    transition: left 0.3s ease-in-out;
+    transition: right 0.3s ease-in-out;
+    z-index: 1;
 
     &.open{
-        left: 0;
+        right: 0;
     }
 `
 
 const GnbItem = styled.li`
     padding-left: 1rem;
-    /* font-size:1.4rem; */
-    font-size:48px;
+    font-size:1.6rem;
     
     a {
         display: inline-block;
