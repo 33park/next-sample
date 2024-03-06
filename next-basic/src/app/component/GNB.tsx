@@ -15,7 +15,8 @@ interface NavItem {
 
 const navItems: NavItem[] = [
     { link: '/', text: '메인' },
-    { link: '/board', text: '게시판 샘플' }
+    { link: '/board', text: '게시판 샘플' },
+    { link: '/todo', text: '투두리스트' }
 ]
 
 
