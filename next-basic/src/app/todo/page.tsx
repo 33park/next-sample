@@ -7,6 +7,10 @@ export default function TodoApp() {
             { date: 1, count: 3 },
             { date: 2, count: 2 },
             { date: 3, count: 1 },
+            { date: 4, count: 1 },
+            { date: 5, count: 1 },
+            { date: 6, count: 1 },
+            { date: 7, count: 1 },
         ];
     
         const registeredList = [
