@@ -23,7 +23,7 @@ const navItems: NavItem[] = [
 export default function GNB() {
     const menuRef = useRef<HTMLDivElement>(null);
                     //menuRef가 참조하는 요소는 HTMLDivElement 타입이라는 말
-    const [ menubar, setMenubar ] = useState(false);
+    const [ menubar, setMenubar ] = useState(true);
     
     const toggleMenu = () => {
         setMenubar(menubar => !menubar);
@@ -55,10 +55,10 @@ export default function GNB() {
                     </GnbItem>
                 ))}
                 <GnbItem>
-                    <Github/>
-                    <Rss/>
-                    <Mail/>
-                    <Phone/>
+                    <Github stroke={theme.colors.white}/>
+                    <Rss stroke={theme.colors.white}/>
+                    <Mail stroke={theme.colors.white}/>
+                    <Phone stroke={theme.colors.white}/>
                 </GnbItem>
             </GnbList>
             <MenuButton onClick={toggleMenu} menubar={menubar.toString()}>

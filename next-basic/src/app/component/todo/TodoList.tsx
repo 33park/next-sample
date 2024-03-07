@@ -3,73 +3,55 @@
 import React,{ useRef, useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@/style/styles/common';
-import { theme } from '../../../style/styles/theme'
+import { theme } from '@/style/styles/theme'
 import { MoreHorizontal } from 'lucide-react';
+
+import InputCheck from '@/assets/images/icon/input_check_empty.svg'
 
 interface TodoProps {
     calendarList: { date: number; count: number }[];
     registeredList: { order: number; content: string; status: boolean }[];
 }
 
-export default function TodoList({ calendarList, registeredList }: TodoProps) {
+export default function TodoList({ registeredList }: TodoProps) {
+    const getOrderColor = (order: number) => {
+        switch (order % 5) {
+            case 1:
+                return '#FFE5A8';
+            case 2:
+                return '#F8FF97';
+            case 3:
+                return '#BCFFA4';
+            case 4:
+                return '#A6FFD3';
+            case 0:
+                return '#B9E3FF';
+            default:
+                return '#C1CCFF'; // Default color
+        }
+    };
 
     return (
-        <TodoContainer>
-            {/* 주말 캘린더 */}
-            <WeekendList>
-                {calendarList.map(({ date, count }) => (
-                    <li key={date}>
-                        <strong>{date}</strong>
-                        <span>{count}</span>
-                    </li>
-                ))}
-            </WeekendList>
+        <>
             {/* 할 일 목록 */}
             <ListContainer>
                 {registeredList.map(({ order, content, status }) => (
                     <TaskItem key={order}>
-                        <Order>{order}</Order>
+                        <Order color={getOrderColor(order)}>{order}</Order>
                         <Content>
                             {content}
                         </Content>
                         <MoreHorizontal stroke={theme.colors.gray}/>
                         <CheckboxContainer>
-                            <input type="checkbox" value={status}/>
+                            <input type="checkbox" checked={status}/>
                         </CheckboxContainer>
                     </TaskItem>
                 ))}
             </ListContainer>
-        </TodoContainer>
+        </>
     );
 }
 
-const TodoContainer = styled.div`
-    ${flexBox()}
-    flex-direction: column;
-    width: 100%;
-    max-width: 48rem;
-    margin: 0 auto;
-    font-size: 1.6rem;
-`;
-
-const WeekendList = styled.ul`
-    ${flexBox({justify:'space-around'})}
-    width: 100%;
-    li{
-        ${flexBox()}
-        flex-direction: column;
-        line-height: 1;
-        background-color: ${theme.colors.light};
-        padding: 0.4rem 0.4rem 0.6rem;
-        border-radius: 1rem;
-        color: ${theme.colors.gray};
-        font-size: 1.2rem;
-
-        strong{
-            margin-bottom: .6rem;
-        }
-    }
-`;
 
 const ListContainer = styled.ul`
     ${flexBox()}
@@ -83,17 +65,18 @@ const TaskItem = styled.li`
     flex:1;
     ${flexBox()}
     width: 100%;
+    padding: 1rem 0;
     border-bottom: 1px solid #ddd;
-    i{
-        flex:none;
-        width: 2rem;
-        height: 100%;
-        font-size:0;
-    }
 `;
 
-const Order = styled.i`
-    margin-right: 1rem;
+const Order = styled.div`
+    display: block;
+    width: 2rem;
+    height: 100%;
+    text-indent: -9999999px;
+    padding: 1rem;
+    background-color: ${({ color }) => color};
+    box-sizing: border-box;
 `;
 
 const Content = styled.span`
@@ -102,6 +85,15 @@ const Content = styled.span`
 `;
 
 const CheckboxContainer = styled.label`
-    margin-left: auto;
+    flex:none;
+    ${flexBox({justify:'center'})}
+    width: 2.4rem;
+    height: 2.4rem;
+    background-image: url(${InputCheck.src});
+    background-position: center;
+    background-size: 100% auto;
+    input {
+        display: none;
+    }
 `;
 
