@@ -7,11 +7,13 @@ import { theme } from '@/style/styles/theme'
 import { MoreHorizontal } from 'lucide-react';
 
 import InputCheck from '@/assets/images/icon/input_check_empty.svg'
+import InputCheckComplete from '@/assets/images/icon/input_checked.svg'
 
 interface TodoProps {
     calendarList: { date: number; count: number }[];
     registeredList: { order: number; content: string; status: boolean }[];
 }
+
 
 export default function TodoList({ registeredList }: TodoProps) {
     const getOrderColor = (order: number) => {
@@ -31,6 +33,11 @@ export default function TodoList({ registeredList }: TodoProps) {
         }
     };
 
+    const [isChecked, setIsChecked] = useState("");
+    const onChangeCheckBox = (e) => {
+        setIsChecked(e.target.value);
+    }
+
     return (
         <>
             {/* 할 일 목록 */}
@@ -42,8 +49,8 @@ export default function TodoList({ registeredList }: TodoProps) {
                             {content}
                         </Content>
                         <MoreHorizontal stroke={theme.colors.gray}/>
-                        <CheckboxContainer>
-                            <input type="checkbox" checked={status}/>
+                        <CheckboxContainer className={isChecked ? 'checked' : ''}>
+                            <input type="checkbox" value={status} onChange={onChangeCheckBox}/>
                         </CheckboxContainer>
                     </TaskItem>
                 ))}
@@ -93,7 +100,11 @@ const CheckboxContainer = styled.label`
     background-position: center;
     background-size: 100% auto;
     input {
-        display: none;
+        opacity: 0;
+    }
+
+    &.checked {
+        background-image: url(${InputCheckComplete.src});
     }
 `;
 
