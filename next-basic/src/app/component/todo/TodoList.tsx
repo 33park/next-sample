@@ -1,64 +1,37 @@
-"use client"
-
-import React,{ useRef, useState, useEffect} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@/style/styles/common';
-import { theme } from '@/style/styles/theme'
+import { theme } from '@/style/styles/theme';
 import { MoreHorizontal } from 'lucide-react';
 
-import InputCheck from '@/assets/images/icon/input_check_empty.svg'
-import InputCheckComplete from '@/assets/images/icon/input_checked.svg'
+import InputCheck from '@/assets/images/icon/input_check_empty.svg';
+import InputCheckComplete from '@/assets/images/icon/input_checked.svg';
 
 interface TodoProps {
-    calendarList: { date: number; count: number }[];
     registeredList: { order: number; content: string; status: boolean }[];
 }
 
-
 export default function TodoList({ registeredList }: TodoProps) {
     const getOrderColor = (order: number) => {
-        switch (order % 5) {
-            case 1:
-                return '#FFE5A8';
-            case 2:
-                return '#F8FF97';
-            case 3:
-                return '#BCFFA4';
-            case 4:
-                return '#A6FFD3';
-            case 0:
-                return '#B9E3FF';
-            default:
-                return '#C1CCFF'; // Default color
-        }
+        const colors = ['#FFE5A8', '#F8FF97', '#BCFFA4', '#A6FFD3', '#B9E3FF'];
+        return colors[order % 5];
     };
 
-    const [isChecked, setIsChecked] = useState("");
-    const onChangeCheckBox = (e) => {
-        setIsChecked(e.target.value);
-    }
-
     return (
-        <>
-            {/* 할 일 목록 */}
-            <ListContainer>
-                {registeredList.map(({ order, content, status }) => (
-                    <TaskItem key={order}>
-                        <Order color={getOrderColor(order)}>{order}</Order>
-                        <Content>
-                            {content}
-                        </Content>
-                        <MoreHorizontal stroke={theme.colors.gray}/>
-                        <CheckboxContainer className={isChecked ? 'checked' : ''}>
-                            <input type="checkbox" value={status} onChange={onChangeCheckBox}/>
-                        </CheckboxContainer>
-                    </TaskItem>
-                ))}
-            </ListContainer>
-        </>
+        <ListContainer>
+            {registeredList.map(({ order, content, status }) => (
+                <TaskItem key={order}>
+                    <Order color={getOrderColor(order)} isChecked={status}>{order}</Order>
+                    <Content isChecked={status}>{content}</Content>
+                    <MoreHorizontal stroke={theme.colors.gray} />
+                    <CheckboxContainer isChecked={status}>
+                        <input type="checkbox" checked={status} readOnly />
+                    </CheckboxContainer>
+                </TaskItem>
+            ))}
+        </ListContainer>
     );
 }
-
 
 const ListContainer = styled.ul`
     ${flexBox()}
@@ -69,42 +42,40 @@ const ListContainer = styled.ul`
 `;
 
 const TaskItem = styled.li`
-    flex:1;
+    flex: 1;
     ${flexBox()}
     width: 100%;
     padding: 1rem 0;
     border-bottom: 1px solid #ddd;
 `;
 
-const Order = styled.div`
+const Order = styled.div<{ color: string; isChecked: boolean }>`
     display: block;
     width: 2rem;
     height: 100%;
-    text-indent: -9999999px;
+    text-indent: -9999px;
     padding: 1rem;
-    background-color: ${({ color }) => color};
+    background-color: ${({ isChecked, color }) => isChecked ? theme.colors.gray : color};
     box-sizing: border-box;
 `;
 
-const Content = styled.span`
+const Content = styled.span<{ isChecked: boolean }>`
     flex: 1;
-    padding:1rem;
+    display: inline-block;
+    padding: 1rem;
+    color: ${({ isChecked }) => isChecked ? theme.colors.gray : '#000'};
+    text-decoration: ${({ isChecked }) => isChecked ? 'line-through' : 'unset'};
 `;
 
-const CheckboxContainer = styled.label`
-    flex:none;
-    ${flexBox({justify:'center'})}
+const CheckboxContainer = styled.label<{ isChecked: boolean }>`
+    flex: none;
+    ${flexBox({ justify: 'center' })}
     width: 2.4rem;
     height: 2.4rem;
-    background-image: url(${InputCheck.src});
+    background-image: url(${({ isChecked }) => isChecked ? InputCheckComplete.src : InputCheck.src});
     background-position: center;
     background-size: 100% auto;
     input {
         opacity: 0;
     }
-
-    &.checked {
-        background-image: url(${InputCheckComplete.src});
-    }
 `;
-
