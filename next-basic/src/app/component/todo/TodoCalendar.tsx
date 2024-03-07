@@ -15,8 +15,8 @@ export default function TodoCalendar({ calendarList }: TodoProps) {
       <>
       {/* 주말 캘린더 */}
         <WeekendList>
-            {calendarList.map(({ date, count }) => (
-                <li key={date}>
+            {calendarList.map(({ date, count },index) => (
+                <li key={index}>
                     <strong>{date}</strong>
                     <span>{count}</span>
                 </li>

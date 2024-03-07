@@ -1,23 +1,35 @@
 "use client"
 
-import React from 'react'
+import React,{useState} from 'react'
 import styled from 'styled-components';
 import { flexBox } from '@/style/styles/common';
 import TodoList from '../component/todo/TodoList'
 import TodoCalendar from '../component/todo/TodoCalendar'
 
 export default function TodoApp() {
+
+        const currentDate = new Date();
+
+        const recentWeekDates = [];
+        for (let i = 0; i < 7; i++) {
+            const date = new Date(currentDate);
+            date.setDate(currentDate.getDate() - i);
+            recentWeekDates.push(date);
+        }
+
+        const formattedRecentWeekDates = recentWeekDates.map(date => {
+            // const year = date.getFullYear();
+            // const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '');
+
+            console.log(day);
+            
+            return `${day}`;
+        });
+
+        const [calendarList , setCalendar] = useState(formattedRecentWeekDates);
+        
         // Sample data
-        const calendarList = [
-            { date: 1, count: 3 },
-            { date: 2, count: 2 },
-            { date: 3, count: 1 },
-            { date: 4, count: 1 },
-            { date: 5, count: 1 },
-            { date: 6, count: 1 },
-            { date: 7, count: 1 },
-        ];
-    
         const registeredList = [
             { order: 1, content: 'Task 1', status: false },
             { order: 2, content: 'Task 2', status: true },
@@ -29,7 +41,7 @@ export default function TodoApp() {
     <div>
         <TodoContainer>
             <h1>Todo List</h1>
-            <TodoCalendar calendarList={calendarList}/>
+            <TodoCalendar calendarList={formattedRecentWeekDates}/>
             <TodoList registeredList={registeredList} />
         </TodoContainer>
     </div>
