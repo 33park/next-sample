@@ -15,20 +15,28 @@ interface TodoProps {
 
 export default function TodoList({ registeredList }: TodoProps) {
 
+    const [list, setList] = useState(registeredList);
 
     const getOrderColor = (order: number) => {
         const colors = ['#FFE5A8', '#F8FF97', '#BCFFA4', '#A6FFD3', '#B9E3FF'];
         return colors[order % 5];
     };
+
     const toggleCheckBox = (index: number) => {
-        const newList = [...registeredList];
-        newList[index].status = !newList[index].status;
-        console.log('checked', newList[index].status);
+        const updatedList = list.map((item, i) => {
+            if (i === index) {
+                return { ...item, status: !item.status };
+                // spread연산자('...')를 이용하여 새로운 객체복사, 기존 'list 변경하지 않고 새로운 리스트 생성
+            }
+            return item;
+        });
+        setList(updatedList);
+        //상태 업데이트
     }
 
     return (
         <ListContainer>
-            {registeredList.map(({ order, content, status },index) => (
+            {list.map(({ order, content, status },index) => (
                 <TaskItem key={order}>
                     <Order color={getOrderColor(order)} $isChecked={status}>{order}</Order>
                     <Content $isChecked={status}>{content}</Content>
@@ -85,6 +93,6 @@ const CheckboxContainer = styled.label<{$isChecked: Boolean}>`
     background-position: center;
     background-size: 100% auto;
     input {
-        /* opacity: 0; */
+        opacity: 0;
     }
 `;
