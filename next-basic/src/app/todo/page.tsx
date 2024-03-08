@@ -20,8 +20,8 @@ export default function TodoApp() {
         <div>
             <TodoContainer>
                 <h1>Todo List</h1>
-                <TodoCalendar calendarList={[]}/>
-                <TodoList registeredList={registeredList} />
+                <TodoCalendar calendarList={[]}  registeredList={registeredList}/>
+                {/* <TodoList registeredList={registeredList} /> */}
             </TodoContainer>
         </div>
     );
