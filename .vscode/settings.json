@@ -1,3 +1,6 @@
 {
-    "workbench.colorTheme": "Darcula"
+    "workbench.colorTheme": "Darcula",
+    "cSpell.words": [
+        "currentdatebold"
+    ]
 }
