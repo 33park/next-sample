@@ -16,12 +16,14 @@ export default function TodoApp() {
         { order: 3, content: 'Task 3', status: false },
     ];
 
+    const todoBoard = []
+
     return (
         <div>
             <TodoContainer>
                 <h1>Todo List</h1>
                 <TodoCalendar calendarList={[]}  registeredList={registeredList}/>
-                {/* <TodoList registeredList={registeredList} /> */}
+                <TodoList todoBoard={todoBoard} />
             </TodoContainer>
         </div>
     );
