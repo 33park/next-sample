@@ -1,21 +1,22 @@
 "use client"
 
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@/style/styles/common';
-import TodoList from '../component/todo/TodoList';
+// import TodoList from '../component/todo/TodoList';
 import TodoCalendar from '../component/todo/TodoCalendar';
 import TodoSampleData from '../../../public/api/todoSample'
 
 export default function TodoApp() {
 
+    const [registeredList, setRegisteredList] = useState(TodoSampleData.todoContent);
 
     return (
         <div>
             <TodoContainer>
                 <h1>Todo List</h1>
-                <TodoCalendar count={[]}/>
-                <TodoList registeredList={TodoSampleData.todoContent}/>
+                <TodoCalendar registeredList={registeredList} />
+                {/* <TodoList registeredList={TodoSampleData.todoContent}/> */}
             </TodoContainer>
         </div>
     );

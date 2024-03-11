@@ -4,14 +4,13 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@/style/styles/common';
 import { theme } from '@/style/styles/theme';
+import TodoList from './TodoList'
 
-
-interface TodoProps {
-    count: number
+interface TodoCalendarProps {
+    registeredList: { order: number; content: string; status: boolean }[];
 }
 
-export default function TodoCalendar({ count }: TodoProps) {
-    const [ inputCount, setInputCount ] = useState(count);
+export default function TodoCalendar({ registeredList }: TodoCalendarProps) {
     const [currentDate, setCurrentDate] = useState(new Date());
 
     useEffect(() => {
@@ -62,6 +61,7 @@ export default function TodoCalendar({ count }: TodoProps) {
                     ))}
                 </WeekendList>
             </CalendarContainer>
+            <TodoList></TodoList>
         </>
     );
 }
