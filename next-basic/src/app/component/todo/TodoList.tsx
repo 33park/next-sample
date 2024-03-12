@@ -10,53 +10,34 @@ import InputCheck from '@/assets/images/icon/input_check_empty.svg';
 import InputCheckComplete from '@/assets/images/icon/input_checked.svg';
 
 interface TodoProps {
-    registeredList: { order: number; content: string; status: boolean }[];
+    order: number;
+    content: string;
+    status: boolean;
+    toggleCheckBox: () => void; // Added toggleCheckBox function
 }
 
-export default function TodoList({ registeredList }: TodoProps) {
+export default function TodoList({ order, content, status, toggleCheckBox }: TodoProps) {
 
-    const [list, setList] = useState(registeredList);
 
     const getOrderColor = (order: number) => {
         const colors = ['#FFE5A8', '#F8FF97', '#BCFFA4', '#A6FFD3', '#B9E3FF'];
         return colors[order % 5];
     };
 
-    const toggleCheckBox = (index: number) => {
-        const updatedList = list.map((item, i) => {
-            if (i === index) {
-                return { ...item, status: !item.status };
-                // spread연산자('...')를 이용하여 새로운 객체복사, 기존 'list 변경하지 않고 새로운 리스트 생성
-            }
-            return item;
-        });
-        setList(updatedList);
-        //상태 업데이트
-    }
-
     return (
-        <ListContainer>
-            {list && list.map(({ order, content, status },index) => (
-                <TaskItem key={order}>
-                    <Order color={getOrderColor(order)} $isChecked={status}>{order}</Order>
-                    <Content $isChecked={status}>{content}</Content>
-                    <MoreHorizontal stroke={theme.colors.gray} />
-                    <CheckboxContainer $isChecked={status}>
-                        <input type="checkbox" defaultChecked={status} onChange={() => toggleCheckBox(index)}/>
-                    </CheckboxContainer>
-                </TaskItem>
-            ))}
-        </ListContainer>
+        <TaskItem>
+            <Order color={getOrderColor(order)} $isChecked={status}>{order}</Order>
+            <Content $isChecked={status}>{content}</Content>
+            <MoreHorizontal stroke={theme.colors.gray} />
+            <CheckboxContainer $isChecked={status}>
+                <input type="checkbox" defaultChecked={status} onChange={toggleCheckBox}/>
+            </CheckboxContainer>
+        </TaskItem>
+        
     );
 }
 
-const ListContainer = styled.ul`
-    ${flexBox()}
-    flex-direction: column;
-    width: 100%;
-    list-style: none;
-    padding: 4rem 2rem;
-`;
+
 
 const TaskItem = styled.li`
     flex: 1;

@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@/style/styles/common';
 import { theme } from '@/style/styles/theme';
-import TodoList from './TodoList'
 
 interface TodoCalendarProps {
     registeredList: { order: number; content: string; status: boolean }[];
@@ -61,7 +60,6 @@ export default function TodoCalendar({ registeredList }: TodoCalendarProps) {
                     ))}
                 </WeekendList>
             </CalendarContainer>
-            <TodoList></TodoList>
         </>
     );
 }
