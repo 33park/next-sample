@@ -10,6 +10,7 @@ import {TODOSAMPLEDATA } from '../../../public/api/todoSample'
 export default function TodoApp() {
 
     const [todoData, setTodoData] = useState([]);
+    const [checkedCount, setCheckedCount] = useState(0);
 
     useEffect(() => {
         if (Array.isArray(TODOSAMPLEDATA)) {
@@ -28,13 +29,18 @@ export default function TodoApp() {
         });
         setTodoData(updatedTodoData);
     };
-    
+
+    useEffect(() => {
+        // Calculate the count of checked checkboxes
+        const count = todoData.filter((item: { status: boolean }) => item.status).length;
+        setCheckedCount(count);
+    }, [todoData]);
 
     return (
         <div>
             <TodoContainer>
                 <h1>Todo List</h1>
-                <TodoCalendar />
+                <TodoCalendar checkedCount={checkedCount}/>
                 <ListContainer>
                     {todoData && todoData.map((data: { order: number; content: string; status: boolean; }, index: number) => (
                         <TodoList

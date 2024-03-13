@@ -1,6 +1,6 @@
 "use client"
 
-import React,{useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@/style/styles/common';
 import { theme } from '@/style/styles/theme';

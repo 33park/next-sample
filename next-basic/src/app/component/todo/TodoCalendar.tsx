@@ -5,11 +5,18 @@ import styled from 'styled-components';
 import { flexBox } from '@/style/styles/common';
 import { theme } from '@/style/styles/theme';
 
+interface DateInfo {
+    year: number;
+    month: number;
+    day: number;
+    isToday: boolean;
+}
 interface TodoCalendarProps {
-    registeredList: { order: number; content: string; status: boolean }[];
+    checkedCount: number;
+    getListData: () => void;
 }
 
-export default function TodoCalendar({ registeredList }: TodoCalendarProps) {
+export default function TodoCalendar({ checkedCount, getListData }: TodoCalendarProps) {
     const [currentDate, setCurrentDate] = useState(new Date());
 
     useEffect(() => {
@@ -21,28 +28,24 @@ export default function TodoCalendar({ registeredList }: TodoCalendarProps) {
         return () => clearInterval(intervalId);
     }, []);
 
-    const generateRecentWeekDates = (currentDate: Date) => {
-        const recentWeekDates = [];
+    const generateRecentWeekDates = (currentDate: Date): DateInfo[] => {
+        const recentWeekDates: DateInfo[] = [];
+        const todayDateString = currentDate.toDateString();
         for (let i = 3; i >= -3; i--) {
             const date = new Date(currentDate);
             date.setDate(currentDate.getDate() - i);
-            recentWeekDates.push(date);
+            recentWeekDates.push({
+                year: date.getFullYear(),
+                month: date.getMonth() + 1,
+                day: date.getDate(),
+                isToday: date.toDateString() === todayDateString
+            });
         }
 
-        return recentWeekDates.map(date => {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '');
-            const day = String(date.getDate()).padStart(2, '');
-            const isToday = date.toDateString() === currentDate.toDateString();
-
-            console.log(isToday);
-            
-            
-            return { thisYear: year, thisMonth: month, date: day, count: 0, isToday: isToday };
-        });
+        return recentWeekDates;
     };
 
-    const formattedRecentWeekDates = generateRecentWeekDates(currentDate);
+    const recentWeekDates: DateInfo[] = generateRecentWeekDates(currentDate);
 
     return (
         <>
@@ -52,13 +55,16 @@ export default function TodoCalendar({ registeredList }: TodoCalendarProps) {
                     <h3>{currentDate.getMonth() + 1}</h3>
                 </div>
                 <WeekendList>
-                    {formattedRecentWeekDates && formattedRecentWeekDates.map(({ date, count, isToday }, index) => (
-                        <ListItem key={index} $checkedToday={isToday}>
-                            <strong>{date}</strong>
-                            <span>{count}</span>
-                        </ListItem>
-                    ))}
-                </WeekendList>
+                {recentWeekDates.map(({ day, isToday }, index) => (
+                    <ListItem 
+                        key={index} 
+                        $checkedToday={isToday}
+                        onClick={getListData}>
+                        <strong>{day}</strong>
+                        <span>{checkedCount}</span>
+                    </ListItem>
+                ))}
+            </WeekendList>
             </CalendarContainer>
         </>
     );
