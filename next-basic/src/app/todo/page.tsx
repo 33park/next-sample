@@ -12,7 +12,6 @@ export default function TodoApp() {
 
     const [todoData, setTodoData] = useState([]);
     const [checkedCount, setCheckedCount] = useState(0);
-    const [inputValue, setInputValue] = useState('');
 
     //get data
     useEffect(() => {
@@ -22,14 +21,6 @@ export default function TodoApp() {
             console.error("TODOSAMPLEDATA is not an array.");
         }
     }, []);
-
-    //TodoForm
-    const handleInputChange = (value: string) => {
-        setInputValue(value); // Update the input value in the state
-        console.log(value);
-        
-    };
-
 
     //TodoList
     const toggleCheckBox = (index: number) => {
@@ -48,7 +39,17 @@ export default function TodoApp() {
         setCheckedCount(count);
     }, [todoData]);
 
-    
+        //TodoForm
+    const handleInputChange = (order: number, content: string) => {
+        // Create a new todo item
+        const newTodo = {
+            order: order, // Assign a new order
+            content: content,
+            status: false // Set the initial status to false
+        };
+        // Update todoData by adding the new todo item
+        setTodoData(prevTodoData => [...prevTodoData, newTodo]);
+    };
 
 
     return (
