@@ -5,13 +5,16 @@ import styled from 'styled-components';
 import { flexBox } from '@/style/styles/common';
 import TodoList from '../component/todo/TodoList';
 import TodoCalendar from '../component/todo/TodoCalendar';
+import TodoForm from '../component/todo/TodoForm';
 import {TODOSAMPLEDATA } from '../../../public/api/todoSample'
 
 export default function TodoApp() {
 
     const [todoData, setTodoData] = useState([]);
     const [checkedCount, setCheckedCount] = useState(0);
+    const [inputValue, setInputValue] = useState('');
 
+    //get data
     useEffect(() => {
         if (Array.isArray(TODOSAMPLEDATA)) {
             setTodoData(TODOSAMPLEDATA); // Set todoData with TODOSAMPLEDATA
@@ -20,6 +23,15 @@ export default function TodoApp() {
         }
     }, []);
 
+    //TodoForm
+    const handleInputChange = (value: string) => {
+        setInputValue(value); // Update the input value in the state
+        console.log(value);
+        
+    };
+
+
+    //TodoList
     const toggleCheckBox = (index: number) => {
         const updatedTodoData = todoData.map((item: { status: any; }, i: number) => {
             if (i === index) {
@@ -36,10 +48,14 @@ export default function TodoApp() {
         setCheckedCount(count);
     }, [todoData]);
 
+    
+
+
     return (
         <div>
             <TodoContainer>
                 <h1>Todo List</h1>
+                <TodoForm onFormSubmit={handleInputChange}></TodoForm>
                 <TodoCalendar checkedCount={checkedCount}/>
                 <ListContainer>
                     {todoData && todoData.map((data: { order: number; content: string; status: boolean; }, index: number) => (
