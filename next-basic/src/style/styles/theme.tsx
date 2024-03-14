@@ -18,4 +18,5 @@ export const theme = {
     colors
 }
 
+
 export type ColorType = keyof typeof colors;

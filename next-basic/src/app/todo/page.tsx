@@ -2,7 +2,7 @@
 
 import React,{useState, useEffect} from 'react';
 import styled from 'styled-components';
-import { flexBox } from '@/style/styles/common';
+import { flexBox, offSet } from '@/style/styles/common';
 import TodoList from '../component/todo/TodoList';
 import TodoCalendar from '../component/todo/TodoCalendar';
 import TodoForm from '../component/todo/TodoForm';
@@ -75,6 +75,7 @@ export default function TodoApp() {
 }
 
 const TodoContainer = styled.div`
+    ${offSet()}
     ${flexBox()}
     flex-direction: column;
     width: 100%;
