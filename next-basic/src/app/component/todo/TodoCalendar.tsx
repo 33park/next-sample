@@ -50,10 +50,10 @@ export default function TodoCalendar({ checkedCount, getListData }: TodoCalendar
     return (
         <>
             <CalendarContainer>
-                <div>
-                    <h2>{currentDate.getFullYear()}</h2>
-                    <h3>{currentDate.getMonth() + 1}</h3>
-                </div>
+                <CalendarTitle>
+                    <CalendarYear>{currentDate.getFullYear()}</CalendarYear><span>年</span>
+                    <CalendarMonth>{currentDate.getMonth() + 1}</CalendarMonth><span>月</span>
+                </CalendarTitle>
                 <WeekendList>
                 {recentWeekDates.map(({ day, isToday }, index) => (
                     <ListItem 
@@ -74,6 +74,21 @@ const CalendarContainer = styled.div`
     display: block;
     width: 100%;
 `;
+
+const CalendarTitle = styled.div`
+    ${flexBox({justify: 'center'})}
+    font-size: 3.2rem;
+    font-weight: bold;
+    margin: 0 0 2rem;
+`
+
+const CalendarYear = styled.h2`
+
+`
+
+const CalendarMonth = styled.h2`
+    margin-left: 1rem;
+`
 
 const WeekendList = styled.ul`
     ${flexBox({justify:'space-around'})}

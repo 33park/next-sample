@@ -36,7 +36,7 @@ export default function TodoForm({defaultInputVal = '', onFormSubmit}:TodoFormPr
     return (
             <>
                 <TodoFormContainer>
-                    <form onSubmit={handleSubmit}>
+                    <FormWrapper onSubmit={handleSubmit}>
                         <select onChange={handleSelect} value={checkOrder.toString()}>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -51,7 +51,7 @@ export default function TodoForm({defaultInputVal = '', onFormSubmit}:TodoFormPr
                             />
                         </label>
                         <button type="submit">등록</button>
-                    </form>
+                    </FormWrapper>
                 </TodoFormContainer>
                 <AddTodoBtn type="button"><Plus stroke={theme.colors.white}/></AddTodoBtn>
             </>
@@ -66,16 +66,36 @@ const TodoFormContainer = styled.div`
     box-sizing: border-box;
     border-radius: 2rem 6rem 6rem 2rem;
 
-    select,input[type="text"] {
-        margin: 0;
-        padding: 0 1rem;
-        border: none;
-        line-height: 2rem;
-        height: 2rem;
-    }
-
     @media ${devices.md} {
         height: 6rem;
+    }
+`
+
+const FormWrapper = styled.form`
+    ${flexBox()}
+    gap: .8rem;
+
+
+    select, label, input, button {
+        line-height: 1;
+    }
+    select {
+        flex: none;
+        width: 4rem;
+        height: 2.4rem;
+    }
+
+    label {
+        flex: 1;
+    }
+
+    input {
+        height: 2.4rem;
+    }
+
+    button {
+        font-size: 1.6rem;
+        color: ${theme.colors.white}
     }
 `
 

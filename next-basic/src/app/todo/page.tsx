@@ -55,7 +55,7 @@ export default function TodoApp() {
     return (
         <div>
             <TodoContainer>
-                <h1>Todo List</h1>
+                {/* <h1>Todo List</h1> */}
                 <TodoForm onFormSubmit={handleInputChange}></TodoForm>
                 <TodoCalendar checkedCount={checkedCount}/>
                 <ListContainer>
@@ -81,6 +81,7 @@ const TodoContainer = styled.div`
     width: 100%;
     max-width: 48rem;
     margin: 0 auto;
+    padding: 10rem 0 0;
     font-size: 1.6rem;
 
     h1 {
