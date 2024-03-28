@@ -95,4 +95,5 @@ const ListContainer = styled.ul`
     width: 100%;
     list-style: none;
     padding: 4rem 2rem;
+    overflow-y: auto;
 `;

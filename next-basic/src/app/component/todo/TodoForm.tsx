@@ -29,10 +29,14 @@ export default function TodoForm({defaultInputVal = '', onFormSubmit}:TodoFormPr
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); // Prevent the default form submission behavior
-        onFormSubmit(checkOrder, writeTodo); // Pass the input value to the parent component
-        setWriteTodo(''); // Clear the input field after submission
-        setCheckOrder(1);
-        toggleFormVisibility();
+        if(writeTodo.length > 0) {
+            onFormSubmit(checkOrder, writeTodo); // Pass the input value to the parent component
+            setWriteTodo(''); // Clear the input field after submission
+            setCheckOrder(1);
+            toggleFormVisibility();
+        } else {
+            alert('할 일을 작성해주세요!')
+        }
     };
 
     const toggleFormVisibility = () => {
