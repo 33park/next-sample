@@ -6,6 +6,7 @@ import { flexBox, offSet } from '@/style/styles/common';
 import TodoList from '../component/todo/TodoList';
 import TodoCalendar from '../component/todo/TodoCalendar';
 import TodoForm from '../component/todo/TodoForm';
+import { theme } from '@/style/styles/theme';
 import {TODOSAMPLEDATA } from '../../../public/api/todoSample'
 
 export default function TodoApp() {
@@ -56,8 +57,8 @@ export default function TodoApp() {
         <div>
             <TodoContainer>
                 {/* <h1>Todo List</h1> */}
-                <TodoForm onFormSubmit={handleInputChange}></TodoForm>
                 <TodoCalendar checkedCount={checkedCount}/>
+                <TodoForm onFormSubmit={handleInputChange}></TodoForm>
                 <ListContainer>
                     {todoData && todoData.map((data: { order: number; content: string; status: boolean; }, index: number) => (
                         <TodoList
@@ -79,16 +80,13 @@ const TodoContainer = styled.div`
     ${flexBox()}
     flex-direction: column;
     width: 100%;
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: 10rem 0 0;
+    max-width: 36rem;
+    height: 74rem;
+    margin: 1rem auto 0;
+    padding: 1.6rem;
+    box-sizing: border-box;
+    background-color: ${theme.colors.white};
     font-size: 1.6rem;
-
-    h1 {
-        font-size: 3.6rem;
-        font-weight: bold;
-        margin: 4rem auto 6rem;
-    }
 `;
 
 const ListContainer = styled.ul`

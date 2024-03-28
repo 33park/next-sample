@@ -51,8 +51,11 @@ export default function TodoCalendar({ checkedCount, getListData }: TodoCalendar
         <>
             <CalendarContainer>
                 <CalendarTitle>
-                    <CalendarYear>{currentDate.getFullYear()}</CalendarYear><span>年</span>
-                    <CalendarMonth>{currentDate.getMonth() + 1}</CalendarMonth><span>月</span>
+                    <h1>Today</h1>
+                    <p>
+                        <CalendarYear>{currentDate.getFullYear()}</CalendarYear><span>년</span>
+                        <CalendarMonth>{currentDate.getMonth() + 1}</CalendarMonth><span>월</span>
+                    </p>
                 </CalendarTitle>
                 <WeekendList>
                 {recentWeekDates.map(({ day, isToday }, index) => (
@@ -76,18 +79,22 @@ const CalendarContainer = styled.div`
 `;
 
 const CalendarTitle = styled.div`
-    ${flexBox({justify: 'center'})}
-    font-size: 3.2rem;
-    font-weight: bold;
+    display: block;
     margin: 0 0 2rem;
+    text-align: left;
+    
+        h1 {
+            font-size: 3.2rem;
+            font-weight: bold;
+        }
 `
 
-const CalendarYear = styled.h2`
-
+const CalendarYear = styled.strong`
+    display: inline-block;
 `
 
-const CalendarMonth = styled.h2`
-    margin-left: 1rem;
+const CalendarMonth = styled.strong`
+    display: inline-block;
 `
 
 const WeekendList = styled.ul`
