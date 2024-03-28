@@ -1,6 +1,6 @@
 'use Client'
 import React,{useState} from 'react'
-import { Plus } from 'lucide-react';
+import { Plus, CirclePlus } from 'lucide-react';
 import styled from 'styled-components';
 import { flexBox, offSet } from '@/style/styles/common';
 import { theme } from '@/style/styles/theme';
@@ -45,7 +45,9 @@ export default function TodoForm({defaultInputVal = '', onFormSubmit}:TodoFormPr
                     {
                         !formShow && 
                         <AddTodoBtn type="button" onClick={toggleFormVisibility}>
-                                <Plus stroke={theme.colors.white} width={24} height={24}/><span>할 일 추가하기</span>
+                                <Plus stroke={theme.colors.white} width={24} height={24}/>
+                                {/* <CirclePlus/> */}
+                                <span>할 일 추가하기</span>
                         </AddTodoBtn>
                     }
                     {
