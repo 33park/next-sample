@@ -34,6 +34,11 @@ export default function TodoApp() {
         setTodoData(updatedTodoData);
     };
 
+    const openEditModal = (index: number) => {
+        console.log(`${index}~?`);
+        
+    }
+
     useEffect(() => {
         // Calculate the count of checked checkboxes
         const count = todoData.filter((item: { status: boolean }) => item.status).length;
@@ -66,7 +71,8 @@ export default function TodoApp() {
                             order={data.order}
                             content={data.content}
                             status={data.status}
-                            toggleCheckBox={() => toggleCheckBox(index)} // Pass toggleCheckBox function with index
+                            toggleCheckBox={() => toggleCheckBox(index)}
+                            openEditModal={() => openEditModal(index)} // Pass toggleCheckBox function with index
                         />
                     ))}
                 </ListContainer>
@@ -81,7 +87,8 @@ const TodoContainer = styled.div`
     flex-direction: column;
     width: 100%;
     max-width: 36rem;
-    height: 74rem;
+    height: 90vh;
+    max-height: 74rem;
     margin: 1rem auto 0;
     padding: 1.6rem;
     box-sizing: border-box;

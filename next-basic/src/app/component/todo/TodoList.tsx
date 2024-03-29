@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { flexBox } from '@/style/styles/common';
 import { theme } from '@/style/styles/theme';
 import { MoreHorizontal } from 'lucide-react';
+import Link from "next/link";
 
 import InputCheck from '@/assets/images/icon/input_check_empty.svg';
 import InputCheckComplete from '@/assets/images/icon/input_checked.svg';
@@ -14,9 +15,10 @@ interface TodoProps {
     content: string;
     status: boolean;
     toggleCheckBox: () => void; // Added toggleCheckBox function
+    openEditModal: () => void; // Added toggleCheckBox function
 }
 
-export default function TodoList({ order, content, status, toggleCheckBox }: TodoProps) {
+export default function TodoList({ order, content, status, toggleCheckBox, openEditModal }: TodoProps) {
 
 
     const getOrderColor = (order: number) => {
@@ -28,7 +30,9 @@ export default function TodoList({ order, content, status, toggleCheckBox }: Tod
         <TaskItem>
             <Order color={getOrderColor(order)} $isChecked={status}>{order}</Order>
             <Content $isChecked={status}>{content}</Content>
-            <MoreHorizontal stroke={theme.colors.gray} />
+            <button type="button" onClick={openEditModal}>
+                <MoreHorizontal stroke={theme.colors.gray} />
+            </button>
             <CheckboxContainer $isChecked={status}>
                 <input type="checkbox" defaultChecked={status} onChange={toggleCheckBox}/>
             </CheckboxContainer>
