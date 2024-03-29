@@ -17,6 +17,11 @@ const Container = styled.div`
 
 const InputContainer = styled.div`
   margin-bottom: 20px;
+
+  input[type='text'] {
+    border: 1px solid red;
+    margin-right: 4px;
+  }
 `;
 
 const TodoItem = styled.li`

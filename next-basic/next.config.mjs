@@ -16,6 +16,12 @@ const nextConfig = {
 
 		return config;
 	},
+	experimental: {
+		appDir: true,
+	},
+	compiler: {
+		styledComponents: true,
+	},
 };
 
 export default nextConfig;
