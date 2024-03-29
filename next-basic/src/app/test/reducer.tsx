@@ -26,7 +26,7 @@ const todoReducer = (state = initialState, action: TodoActionTypes): TodoState =
       return {
         ...state,
         todos: state.todos.map(todo =>
-          todo.id === action.payload ? { ...todo, completed: true } : todo
+            todo.id === action.payload.id ? { ...todo, completed: action.payload.completed } : todo
         ),
       };
     case DELETE_TODO:

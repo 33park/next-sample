@@ -27,14 +27,16 @@ export const addTodo = (todo: Todo): AddTodoAction => ({
   payload: todo,
 });
 
-export const completeTodo = (id: number): CompleteTodoAction => ({
-  type: COMPLETE_TODO,
-  payload: id,
+export const completeTodo = (id: number, completed: boolean): CompleteTodoAction => ({
+    type: COMPLETE_TODO,
+    payload: { id, completed },
 });
-
+  
 export const deleteTodo = (id: number): DeleteTodoAction => ({
   type: DELETE_TODO,
   payload: id,
 });
+
+
 
 export type { Todo };
