@@ -11,15 +11,15 @@ import InputCheck from '@/assets/images/icon/input_check_empty.svg';
 import InputCheckComplete from '@/assets/images/icon/input_checked.svg';
 
 interface TodoProps {
-    order: number;
+    priority: number;
     content: string;
     status: boolean;
-    editPop: boolean;
     toggleCheckBox: () => void; // Added toggleCheckBox function
-    openEditModal: (order: number) => void; // Added toggleCheckBox function
+    openEditModal: () => void; // Added toggleCheckBox function
+    editPop: boolean;
 }
 
-export default function TodoList({ order, content, status, editPop, toggleCheckBox, openEditModal }: TodoProps) {
+export default function TodoList({ priority, content, status, editPop, toggleCheckBox, openEditModal }: TodoProps) {
 
 
     const getOrderColor = (order: number) => {
@@ -27,23 +27,17 @@ export default function TodoList({ order, content, status, editPop, toggleCheckB
         return colors[order % 5];
     };
 
-    const handleOpenEditModal = () => {
-        openEditModal(order); // Pass the order/index of the todo item to the openEditModal function
-        console.log(`order ${order}`);
-        
-    };
-
     return (
         <TaskItem>
-            <Order color={getOrderColor(order)} $isChecked={status}>{order}</Order>
+            <Order color={getOrderColor(priority)} $isChecked={status}>{priority}</Order>
             <Content $isChecked={status}>{content}</Content>
-            <button type="button" onClick={handleOpenEditModal}>
+            <button type="button" onClick={openEditModal}>
                 <MoreHorizontal stroke={theme.colors.gray} />
             </button>
             <CheckboxContainer $isChecked={status}>
                 <input type="checkbox" defaultChecked={status} onChange={toggleCheckBox}/>
             </CheckboxContainer>
-            { editPop === order &&
+            { editPop  &&
                 <EditBtnPopup>
                     <button type="button">수정</button>
                     <button type="button">삭제</button>

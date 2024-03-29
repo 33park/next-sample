@@ -8,12 +8,13 @@ import TodoCalendar from '../component/todo/TodoCalendar';
 import TodoForm from '../component/todo/TodoForm';
 import { theme } from '@/style/styles/theme';
 import {TODOSAMPLEDATA } from '../../../public/api/todoSample'
+import { log } from 'console';
 
 export default function TodoApp() {
 
     const [todoData, setTodoData] = useState([]);
     const [checkedCount, setCheckedCount] = useState(0);
-    const [editPopup, setEditPopup] = useState(false);
+    const [editPopups, setEditPopups] = useState<boolean[]>([]); 
 
     //get data
     useEffect(() => {
@@ -35,12 +36,11 @@ export default function TodoApp() {
         setTodoData(updatedTodoData);
     };
 
-    // TodoList
-    const openEditModal = (index: number) => {
-        console.log(`index ${index}`);
-        setEditPopup(index);
+    const toggleEditModal = (index: number) => {
+        const updatedEditPopups = [...editPopups];
+        updatedEditPopups[index] = !updatedEditPopups[index]; // Toggle edit popup for this item
+        setEditPopups(updatedEditPopups);
     };
-
 
     useEffect(() => {
         // Calculate the count of checked checkboxes
@@ -49,10 +49,10 @@ export default function TodoApp() {
     }, [todoData]);
 
         //TodoForm
-    const handleInputChange = (order: number, content: string) => {
+    const handleInputChange = (priority: number, content: string) => {
         // Create a new todo item
         const newTodo = {
-            order: order, // Assign a new order
+            priority: priority, // Assign a new order
             content: content,
             status: false // Set the initial status to false
         };
@@ -68,16 +68,15 @@ export default function TodoApp() {
                 <TodoCalendar checkedCount={checkedCount}/>
                 <TodoForm onFormSubmit={handleInputChange}></TodoForm>
                 <ListContainer>
-                    {todoData && todoData.map((data: { order: number; content: string; status: boolean;}, index: number) => (
+                    {todoData && todoData.map((data: { priority: number; content: string; status: boolean;}, index: number) => (
                         <TodoList
                             key={index}
-                            // order={data.order}
-                            order={index}
+                            priority={data.priority}
                             content={data.content}
                             status={data.status}
                             toggleCheckBox={() => toggleCheckBox(index)}
-                            openEditModal={() => openEditModal(index)} // Pass toggleCheckBox function with index
-                            editPop={editPopup} 
+                            openEditModal={() => toggleEditModal(index)} // Pass toggleCheckBox function with index
+                            editPop={editPopups[index]}
                         />
                     ))}
                 </ListContainer>
