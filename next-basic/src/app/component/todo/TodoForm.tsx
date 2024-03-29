@@ -67,9 +67,9 @@ export default function TodoForm({defaultInputVal = '', onFormSubmit}:TodoFormPr
                             </label>
                             <SelectTitle>카테고리</SelectTitle>
                             <PriorityWrapper>
-                                <li><button>중요도1</button></li>
-                                <li><button>중요도2</button></li>
-                                <li><button>중요도3</button></li>
+                                <li><button>카테고리1</button></li>
+                                <li><button>카테고리2</button></li>
+                                <li><button>카테고리3</button></li>
                             </PriorityWrapper>
                             <SelectTitle>중요도</SelectTitle>
                             <select onChange={handleSelect} value={checkOrder.toString()}>
@@ -98,6 +98,7 @@ const TodoFormContainer = styled.div`
     background-color: ${(theme.colors.primary)};
     border-radius: 4rem 4rem 0 0 ;
     box-sizing: border-box;
+    z-index: 1;
 `
 
 const FormWrapper = styled.form`

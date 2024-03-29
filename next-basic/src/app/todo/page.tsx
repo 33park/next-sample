@@ -13,6 +13,7 @@ export default function TodoApp() {
 
     const [todoData, setTodoData] = useState([]);
     const [checkedCount, setCheckedCount] = useState(0);
+    const [editPopup, setEditPopup] = useState(false);
 
     //get data
     useEffect(() => {
@@ -34,10 +35,12 @@ export default function TodoApp() {
         setTodoData(updatedTodoData);
     };
 
+    // TodoList
     const openEditModal = (index: number) => {
-        console.log(`${index}~?`);
-        
-    }
+        console.log(`index ${index}`);
+        setEditPopup(index);
+    };
+
 
     useEffect(() => {
         // Calculate the count of checked checkboxes
@@ -65,14 +68,16 @@ export default function TodoApp() {
                 <TodoCalendar checkedCount={checkedCount}/>
                 <TodoForm onFormSubmit={handleInputChange}></TodoForm>
                 <ListContainer>
-                    {todoData && todoData.map((data: { order: number; content: string; status: boolean; }, index: number) => (
+                    {todoData && todoData.map((data: { order: number; content: string; status: boolean;}, index: number) => (
                         <TodoList
                             key={index}
-                            order={data.order}
+                            // order={data.order}
+                            order={index}
                             content={data.content}
                             status={data.status}
                             toggleCheckBox={() => toggleCheckBox(index)}
                             openEditModal={() => openEditModal(index)} // Pass toggleCheckBox function with index
+                            editPop={editPopup} 
                         />
                     ))}
                 </ListContainer>
@@ -102,5 +107,5 @@ const ListContainer = styled.ul`
     width: 100%;
     list-style: none;
     padding: 4rem 2rem;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 `;

@@ -14,11 +14,12 @@ interface TodoProps {
     order: number;
     content: string;
     status: boolean;
+    editPop: boolean;
     toggleCheckBox: () => void; // Added toggleCheckBox function
-    openEditModal: () => void; // Added toggleCheckBox function
+    openEditModal: (order: number) => void; // Added toggleCheckBox function
 }
 
-export default function TodoList({ order, content, status, toggleCheckBox, openEditModal }: TodoProps) {
+export default function TodoList({ order, content, status, editPop, toggleCheckBox, openEditModal }: TodoProps) {
 
 
     const getOrderColor = (order: number) => {
@@ -26,16 +27,28 @@ export default function TodoList({ order, content, status, toggleCheckBox, openE
         return colors[order % 5];
     };
 
+    const handleOpenEditModal = () => {
+        openEditModal(order); // Pass the order/index of the todo item to the openEditModal function
+        console.log(`order ${order}`);
+        
+    };
+
     return (
         <TaskItem>
             <Order color={getOrderColor(order)} $isChecked={status}>{order}</Order>
             <Content $isChecked={status}>{content}</Content>
-            <button type="button" onClick={openEditModal}>
+            <button type="button" onClick={handleOpenEditModal}>
                 <MoreHorizontal stroke={theme.colors.gray} />
             </button>
             <CheckboxContainer $isChecked={status}>
                 <input type="checkbox" defaultChecked={status} onChange={toggleCheckBox}/>
             </CheckboxContainer>
+            { editPop === order &&
+                <EditBtnPopup>
+                    <button type="button">수정</button>
+                    <button type="button">삭제</button>
+                </EditBtnPopup>
+            }
         </TaskItem>
         
     );
@@ -44,6 +57,7 @@ export default function TodoList({ order, content, status, toggleCheckBox, openE
 
 
 const TaskItem = styled.li`
+    position: relative;
     flex: 1;
     ${flexBox()}
     width: 100%;
@@ -85,3 +99,25 @@ const CheckboxContainer = styled.label<{$isChecked: Boolean}>`
         opacity: 0;
     }
 `;
+
+const EditBtnPopup = styled.div`
+    position: absolute;
+    top: 50%;
+    right: 0;
+    ${flexBox()}
+    flex-direction: column;
+    transform: translate(100%, -50%);
+    background-color: ${theme.colors.white};
+    box-shadow: 0 0 .4rem rgba(0,0,0,0.2);
+    
+    button {
+        width: 5rem;
+        font-size: 1.4rem;
+        line-height: 2;
+
+        &:hover {
+            background-color: ${theme.colors.black};
+            color: ${theme.colors.white};
+        }
+    }
+`
