@@ -36,3 +36,5 @@ export const deleteTodo = (id: number): DeleteTodoAction => ({
   type: DELETE_TODO,
   payload: id,
 });
+
+export type { Todo };

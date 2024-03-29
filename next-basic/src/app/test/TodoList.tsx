@@ -1,3 +1,4 @@
+'use Client'
 // TodoList.tsx
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +10,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 48rem;
+  height: 72rem;
+  margin: 1rem auto;
 `;
 
 const InputContainer = styled.div`
@@ -16,15 +20,21 @@ const InputContainer = styled.div`
 `;
 
 const TodoItem = styled.li`
-  list-style: none;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    list-style: none;
+    margin-bottom: 10px;
+
+  input[type='checkbox'] {
+    -webkit-appearance: checkbox;
+    appearance: checkbox;
+  }
 `;
 
-const TodoText = styled.span<{ completed: boolean }>`
-  flex-grow: 1;
-  text-decoration: ${props => (props.completed ? 'line-through' : 'none')};
+const TodoText = styled.span<{ $isCompleted: boolean }>`
+  flex: 1;
+  text-decoration: ${props => (props.$isCompleted ? 'line-through' : 'none')};
 `;
 
 TodoText.displayName = 'TodoText';
@@ -77,12 +87,14 @@ const TodoList: React.FC = () => {
       <ul>
         {todos.map(todo => (
           <TodoItem key={todo.id}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => handleCompleteTodo(todo.id)}
-            />
-            <TodoText completed={todo.completed}>{todo.text}</TodoText>
+            <label>
+                <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => handleCompleteTodo(todo.id)}
+                />
+            </label>
+            <TodoText $isCompleted={todo.completed}>{todo.text}</TodoText>
             <DeleteButton onClick={() => handleDeleteTodo(todo.id)}>Delete</DeleteButton>
           </TodoItem>
         ))}
