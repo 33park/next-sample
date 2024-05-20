@@ -1,4 +1,5 @@
 import React from 'react'
+import { flexBox } from '@/style/styles/common';
 import { styled } from 'styled-components'
 
 interface HeartProps {
@@ -7,14 +8,17 @@ interface HeartProps {
 
 export default function Heart({onLikeToggle} : HeartProps) {
   return (
-        <HeartLabel htmlFor="toggle-heart" aria-label="like" onClick={onLikeToggle}>
-            ❤<input id="toggle-heart" type="checkbox"/>
-        </HeartLabel>
+    <HeartLabel>
+        <input id="toggle-heart" type="checkbox"/>
+        <label htmlFor="toggle-heart" aria-label="like" onClick={onLikeToggle}>❤</label>
+    </HeartLabel>
   )
 }
 
-const HeartLabel = styled.label`
-        
+const HeartLabel = styled.div`
+    position: relative;
+    ${flexBox({justify:'center', align: 'center'})}
+
     input#toggle-heart {
         position: absolute;
         left: -100vw;
@@ -43,20 +47,20 @@ const HeartLabel = styled.label`
                 animation-name: sparkles;
     }
     input#toggle-heart:focus + label {
-    text  -shadow: 0 0 3px white,  0 1px 1px white, 0 -1px 1px white,  1px 0 1px white, -1px 0 1px white;
+        text-shadow: 0 0 3px white,  0 1px 1px white, 0 -1px 1px white,  1px 0 1px white, -1px 0 1px white;
     }
 
     label[for='toggle-heart'] {
         align-self: center;
         position: relative;
         color: #888;
-        font-size: 2em;
         filter: grayscale(1);
         -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
                 user-select: none;
         cursor: pointer;
+        transform-origin: center;
     }
     label[for='toggle-heart']:before, label[for='toggle-heart']:after {
         position: absolute;
@@ -116,7 +120,7 @@ const HeartLabel = styled.label`
             border-width: 0;
         }
     }
-    
+
     @-webkit-keyframes sparkles {
         0%, 20% {
             opacity: 0;

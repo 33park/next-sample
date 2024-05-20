@@ -125,16 +125,15 @@ const ThumbnailImage = styled.img`
 `
 
 const LikedIcon = styled.div`
-    display: inline-block;
+    flex:none;
+    position: relative;
+    display: inline-flex;
+    ${flexBox({justify:'center', align: 'center'})}
     width: 2.4rem;
     height: 2.4rem;
     margin-right: .4rem;
+    font-size: 2rem;
     cursor: pointer;
-/* 
-    svg{
-        width: 100%;
-        height: auto;
-    } */
 `
 const UserComment = styled.p`
     line-height: 1.25;
