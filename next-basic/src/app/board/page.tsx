@@ -2,12 +2,13 @@
 
 import React,{useState, useEffect} from 'react'
 import { styled } from 'styled-components'
+import { useRouter } from 'next/navigation';
 import Instargram from '@/app/component/Instargram'
 import boardData from "../../../public/api/boardData"
 
 export default function Board() {
     const [boardItems, setBoardItems] = useState([]);
-
+    const router = useRouter();
     // 컴포넌트가 마운트될 때 JSON 데이터를 가져와서 boardItems 상태 변수에 설정합니다.
     useEffect(() => {
         setBoardItems(boardData);
@@ -27,6 +28,11 @@ export default function Board() {
         });
     };
 
+    const handleEditToggle = (itemId) => {
+        console.log(itemId);
+        router.push(`/edit/${itemId}`);
+    }
+
     return (
         <>
             <UserBoardContainer>
@@ -41,6 +47,7 @@ export default function Board() {
                         likedCount={data.likedCount}
                         upLoadedImage={data.upLoadedImage}
                         onLikeToggle={() => handleLikeToggle(index)}
+                        onEdit={() => handleEditToggle(index)}
                     />
                 ))}
             </UserBoardContainer>

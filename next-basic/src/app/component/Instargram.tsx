@@ -2,8 +2,9 @@
 
 import React,{useRef, useState} from 'react'
 import { styled } from 'styled-components'
-import { Heart, MoreHorizontal  } from 'lucide-react';
+import { MoreHorizontal  } from 'lucide-react';
 import { flexBox } from '@/style/styles/common';
+import Heart from './icon/Heart'
 
 interface BoardProps {
     userId: number;
@@ -13,19 +14,25 @@ interface BoardProps {
     likedCount: number;
     upLoadedImage: string[];
     onLikeToggle: () => void;
+    onEdit: () => void;
 }
 
 
-export default function Instargram({ userId, userName, content, isLiked, likedCount, upLoadedImage, onLikeToggle }: BoardProps ) {
+export default function Instargram({ userId, userName, content, isLiked, likedCount, upLoadedImage, onLikeToggle, onEdit }: BoardProps ) {
+    const [openEdit, setOpenEdit] = useState(false);
+    
+    const toggleEdit = ()=>{
+        setOpenEdit(prev => !prev);
+    }
 
     return (
             <UserBox>
                 <UserUtil>
                     <AlignCenter>
-                        <UserIcon src={`/images/user/icon/${userId}.jpg`} alt={userName} width={50} height={50}/>
+                        <UserIcon src={`/images/uploaded/${userId}/_profile.jpg`} alt={userName} width={50} height={50}/>
                         <span>{userName}</span>
                     </AlignCenter>
-                    <button type="button"><MoreHorizontal /></button>
+                    <button type="button" onClick={toggleEdit}><MoreHorizontal /></button>
                 </UserUtil>
                 <ImageContainer>
                     <ImageWrapper>
@@ -38,12 +45,19 @@ export default function Instargram({ userId, userName, content, isLiked, likedCo
                     </ImageWrapper>
                 </ImageContainer>
                 <RightCenter>
-                    <LikedIcon onClick={onLikeToggle}>
-                        <Heart fill={isLiked ? 'gray' : 'red'} stroke={`transparent`}/>
+                    <LikedIcon>
+                        {/* <Heart fill={isLiked ? 'gray' : 'red'} stroke={`transparent`}/> */}
+                        <Heart onLikeToggle={onLikeToggle}/>
                     </LikedIcon>
                     <span>{likedCount}</span>
                 </RightCenter>
                 <UserComment><strong>{userId}</strong>{content}</UserComment>
+                {openEdit && (
+                    <EditBox>
+                        <button onClick={onEdit}>Edit</button>
+                        <button onClick={() => console.log('Delete clicked')}>Delete</button>
+                    </EditBox>
+                )}
             </UserBox>
     )
 }
@@ -59,13 +73,14 @@ const RightCenter = styled.p`
 `
 
 const UserBox = styled.li`
+    position: relative;
     flex:1;
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 10px 0;
-    margin: 0 0 20px;
-    border-top: 1px solid #eee;
+    padding: 1rem 0;
+    margin: 0 0 2rem;
+    border-top: .1rem solid #eee;
     font-size: 1.6rem;
 `
 const UserIcon = styled.img`
@@ -109,17 +124,17 @@ const ThumbnailImage = styled.img`
     object-fit: cover;
 `
 
-const LikedIcon = styled.i`
+const LikedIcon = styled.div`
     display: inline-block;
-    width: 24px;
-    height: 24px;
-    margin-right: 4px;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-right: .4rem;
     cursor: pointer;
-
+/* 
     svg{
         width: 100%;
         height: auto;
-    }
+    } */
 `
 const UserComment = styled.p`
     line-height: 1.25;
@@ -130,5 +145,28 @@ const UserComment = styled.p`
     }
     span {
         font-size: 0.9em;
+    }
+`
+const EditBox = styled.div`
+    position: absolute;
+    right: 0;
+    top: 40px;
+    ${flexBox({justify:'flex-end',align:'flex-end'})}
+    flex-direction: column;
+    box-shadow: 0 0 1rem 0 rgba(58, 58, 61, 0.1);
+    button {
+        flex:none;
+        display: block;
+        width: 8rem;
+        line-height: 2.4rem;
+        border: none;
+        background-color: #fff;
+        color: black;
+        cursor: pointer;
+        font-size: 1.1rem;
+
+        &:hover {
+            background-color: #eee;
+        }
     }
 `
