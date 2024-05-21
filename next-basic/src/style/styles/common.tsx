@@ -48,7 +48,7 @@ export const BorderSet = (props: BorderProps = {}) => css`
 
 interface BtnProps {
     flex?: 'none' | null;
-    width?: 'auto' | null;
+    width?: '100%' | null;
     height?: '4.8rem' | null;
     padding: '0 1rem' | null;
     borderColor?: 'black' | null;
@@ -67,4 +67,5 @@ export const DefaultBtn = (props: BtnProps) => css`
     border-style: solid;
     border-color: ${props.borderColor || 'black'};
     border-radius: ${props.radius || '.5rem'};
+    box-sizing: border-box;
 `

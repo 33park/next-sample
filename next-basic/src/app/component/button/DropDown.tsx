@@ -1,7 +1,6 @@
 'use client'
 import React,{useState} from 'react'
 import { styled } from 'styled-components'
-
 import { flexBox,offSet, DefaultBtn,BorderSet } from '@/style/styles/common'
 import { theme } from '@/style/styles/theme';
 
@@ -9,31 +8,29 @@ interface ButtonProps {
     btnHeight: string;
     placeHolderTxt:string;
     DropDownList:string[];
-    // onChangeList: (selectedItem: string) => void;
 }
 
 
-export default function DropDown({btnHeight, placeHolderTxt, DropDownList, }:ButtonProps) {
+export default function DropDown({btnHeight, placeHolderTxt, DropDownList}:ButtonProps) {
     const [listOpen, setListOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(placeHolderTxt);
     const onToggle = () => {
         setListOpen(listOpen => !listOpen);
     }
 
-    const handleItemClick = (item : string) => {
+    const handleItemClick = (item: string) => {
         setSelectedItem(item);
         setListOpen(false);
-    }
+    };
 
     return (
     <DropDownBtn>
         <BasicBtn onClick={onToggle} $height={btnHeight} $status={listOpen}>{selectedItem}</BasicBtn>
         {listOpen && <DropWrapper $height={btnHeight}>
             {DropDownList.map((list, index) => (
-                <Droplist $height={btnHeight} key={`${list}${index}`} onClick={handleItemClick(list[index])}>{list}</Droplist> 
+                <Droplist $height={btnHeight} key={`${list}${index}`} onClick={() => handleItemClick(list)}>{list}</Droplist> 
             ))}
         </DropWrapper>}
-        
     </DropDownBtn>
   )
 }
@@ -43,7 +40,7 @@ const DropDownBtn = styled.div`
     `
 
 const BasicBtn = styled.div<{ $height: string, $status: Boolean}>`
-    ${props => DefaultBtn({ height: props.$height })};
+    ${props => DefaultBtn({ width: '100%' , height: props.$height })};
     border-radius: ${({$status}) => $status ? '0.5rem 0.5rem 0 0 ' : '0.5rem'};
     `
 

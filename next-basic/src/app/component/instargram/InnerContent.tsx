@@ -1,13 +1,15 @@
-import React  from 'react'
+'use client'
+import React,{useState} from 'react'
 import Link from "next/link";
-import { Grid3X3, SquarePlay,ContactRound,PanelTopClose   } from 'lucide-react';
+import { Grid3X3, SquarePlay,ContactRound,PanelTopClose,ChevronDown    } from 'lucide-react';
 import { styled } from 'styled-components'
-import { flexBox } from '@/style/styles/common'
+import { flexBox, DefaultBtn } from '@/style/styles/common'
 import boardData from "api/boardData.js"
 import DropDown from '../button/DropDown';
 
 
 export default function InnerContent() {
+    
     return (
         <main>
             <ContentHead>
@@ -26,8 +28,8 @@ export default function InnerContent() {
                 </UserProfileIntro>
                 <UserUtilSec>
                     <DropDown btnHeight={'3.6rem'} placeHolderTxt={'팔로잉'} DropDownList={['메세지','환경설정']}/>
-                    <div>Messages</div>
-                    <button type="button">down</button>
+                    <UserUtilBtn $height={'3.6rem'}>Messages</UserUtilBtn>
+                    <UserUtilBtn $height={'3.6rem'} ><ChevronDown /></UserUtilBtn>
                 </UserUtilSec>
                 <section>
                     recommend
@@ -146,5 +148,16 @@ const GalleryTable = styled.ul`
 `
 
 const UserUtilSec = styled.section`
-    ${flexBox()};
+    display: grid;
+    gap: .8rem;
+    grid-template-columns: 6fr 6fr 1fr;
+
+`
+
+const UserUtilBtn = styled.button<{ $height: string}>`
+    ${props => DefaultBtn({ height: props.$height })};
+    
+    svg {
+        width: 2rem;
+    }
 `
