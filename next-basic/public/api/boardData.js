@@ -22,7 +22,7 @@ const COMMENTDATA = [
 		content: "정원 가꾸기는 예술의 한 형태입니다. 씨앗을 심고 키워나가는 과정에서 창조적인 즐거움을 느껴보세요.",
 		isLiked: true,
 		likedCount: 20,
-		upLoadedImage: ["03"],
+		boardData: ["03"],
 	},
 	{
 		userId: "1000000chris",
