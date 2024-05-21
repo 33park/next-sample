@@ -37,7 +37,7 @@ export default function Instargram({ userId, userName, content, isLiked, likedCo
                 <ImageContainer>
                     <ImageWrapper>
                         {/* 타입스크립트가 image, index에 대한 명시적 타입 */}
-                        {upLoadedImage.map((image: string, index: number) => (
+                        {upLoadedImage && upLoadedImage.map((image: string, index: number) => (
                             <ImageBox key={index}>
                                 <ThumbnailImage src={`/images/uploaded/${userId}/${image}.jpg`} alt={`Image ${index + 1}`} />
                             </ImageBox>

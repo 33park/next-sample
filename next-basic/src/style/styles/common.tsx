@@ -33,13 +33,38 @@ export const offSet = (props: PositionProps = {}) => css`
 
 // border round
 interface BorderProps {
-    width?: '.1rme' | '';
-    style?: 'solid' | '';
-    color?: '#000' | '';
+    width?: '.1rme' | null;
+    style?: 'solid' | null;
+    color?: '#000' | null;
 }
 
 export const BorderSet = (props: BorderProps = {}) => css`
     border-width: ${props.width || '.1rem'};
     border-style: ${props.style || 'solid'};
     border-color: ${props.color || '#000'};
+`
+
+// button default
+
+interface BtnProps {
+    flex?: 'none' | null;
+    width?: 'auto' | null;
+    height?: '4.8rem' | null;
+    padding: '0 1rem' | null;
+    borderColor?: 'black' | null;
+    radius?: '.5rem' | null;
+}
+
+export const DefaultBtn = (props: BtnProps) => css`
+    flex:${props.flex || 'none'};
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: ${props.width || 'auto'};
+    height: ${props.height || '4.8rem'};
+    padding: ${props.padding || '0 1rem'};
+    border-width: .1rem;
+    border-style: solid;
+    border-color: ${props.borderColor || 'black'};
+    border-radius: ${props.radius || '.5rem'};
 `

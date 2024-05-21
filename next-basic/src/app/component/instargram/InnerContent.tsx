@@ -4,6 +4,7 @@ import { Grid3X3, SquarePlay,ContactRound,PanelTopClose   } from 'lucide-react';
 import { styled } from 'styled-components'
 import { flexBox } from '@/style/styles/common'
 import boardData from "api/boardData.js"
+import DropDown from '../button/DropDown';
 
 
 export default function InnerContent() {
@@ -23,11 +24,11 @@ export default function InnerContent() {
                 <UserProfileIntro>
                     <p>박소현, 개발자, 95년생</p>
                 </UserProfileIntro>
-                <section>
-                    <div>Following</div>
+                <UserUtilSec>
+                    <DropDown btnHeight={'3.6rem'} placeHolderTxt={'팔로잉'} DropDownList={['메세지','환경설정']}/>
                     <div>Messages</div>
                     <button type="button">down</button>
-                </section>
+                </UserUtilSec>
                 <section>
                     recommend
                 </section>
@@ -74,6 +75,7 @@ const UserProfileTop = styled.section`
 
 const UserProfileIntro = styled.section`
     padding: 1rem 0;
+    font-size: 1.2rem;
     
 `
 const UserProfileIco = styled.section`
@@ -141,4 +143,8 @@ const GalleryTable = styled.ul`
                 }
             }
         }
+`
+
+const UserUtilSec = styled.section`
+    ${flexBox()};
 `
