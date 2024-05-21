@@ -2,9 +2,8 @@
 
 import React,{useRef, useState} from 'react'
 import { styled } from 'styled-components'
-import { MoreHorizontal  } from 'lucide-react';
+import { Heart, MoreHorizontal  } from 'lucide-react';
 import { flexBox } from '@/style/styles/common';
-import Heart from './icon/Heart'
 
 interface BoardProps {
     userId: number;
@@ -13,12 +12,13 @@ interface BoardProps {
     isLiked: boolean;
     likedCount: number;
     upLoadedImage: string[];
+    onUserRoute: () => void;
     onLikeToggle: () => void;
     onEdit: () => void;
 }
 
 
-export default function Instargram({ userId, userName, content, isLiked, likedCount, upLoadedImage, onLikeToggle, onEdit }: BoardProps ) {
+export default function Instargram({ userId, userName, content, isLiked, likedCount, upLoadedImage, onUserRoute, onLikeToggle, onEdit }: BoardProps ) {
     const [openEdit, setOpenEdit] = useState(false);
     
     const toggleEdit = ()=>{
@@ -28,7 +28,7 @@ export default function Instargram({ userId, userName, content, isLiked, likedCo
     return (
             <UserBox>
                 <UserUtil>
-                    <AlignCenter>
+                    <AlignCenter onClick={onUserRoute}>
                         <UserIcon src={`/images/uploaded/${userId}/_profile.jpg`} alt={userName} width={50} height={50}/>
                         <span>{userName}</span>
                     </AlignCenter>
@@ -45,9 +45,9 @@ export default function Instargram({ userId, userName, content, isLiked, likedCo
                     </ImageWrapper>
                 </ImageContainer>
                 <RightCenter>
-                    <LikedIcon>
-                        {/* <Heart fill={isLiked ? 'gray' : 'red'} stroke={`transparent`}/> */}
-                        <Heart onLikeToggle={onLikeToggle}/>
+                    <LikedIcon onClick={onLikeToggle}>
+                        <Heart fill={isLiked ? 'gray' : 'red'} stroke={`transparent`}/>
+                        {/* <Heart onLikeToggle={onLikeToggle}/> */}
                     </LikedIcon>
                     <span>{likedCount}</span>
                 </RightCenter>
@@ -65,11 +65,13 @@ export default function Instargram({ userId, userName, content, isLiked, likedCo
 const UserUtil = styled.div`
     ${flexBox({justify:'space-between'})}
 `
-const AlignCenter = styled.p`
-    ${flexBox()}
+const AlignCenter = styled.a`
+    ${flexBox()};
+    cursor: pointer;
 `
 const RightCenter = styled.p`
     ${flexBox({justify:'flex-end'})}
+    padding: 0 0 .8rem;
 `
 
 const UserBox = styled.li`
@@ -124,7 +126,7 @@ const ThumbnailImage = styled.img`
     object-fit: cover;
 `
 
-const LikedIcon = styled.div`
+const LikedIcon = styled.i`
     flex:none;
     position: relative;
     display: inline-flex;

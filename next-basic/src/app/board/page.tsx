@@ -28,9 +28,9 @@ export default function Board() {
         });
     };
 
-    const handleEditToggle = (itemId) => {
-        console.log(itemId);
-        router.push(`/edit/${itemId}`);
+    const handleUserProfile = (userId) => {
+        console.log(userId);
+        router.push(`/user/${userId}`);
     }
 
     return (
@@ -46,8 +46,9 @@ export default function Board() {
                         isLiked={data.isLiked}
                         likedCount={data.likedCount}
                         upLoadedImage={data.upLoadedImage}
+                        onUserRoute={() => handleUserProfile(data.userId)}
                         onLikeToggle={() => handleLikeToggle(index)}
-                        onEdit={() => handleEditToggle(index)}
+                        // onEdit={() => handleUserProfile(data.userId)}
                     />
                 ))}
             </UserBoardContainer>
