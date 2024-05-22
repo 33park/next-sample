@@ -1,27 +1,28 @@
 'use client'
 import React,{useEffect, useState} from 'react'
-import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from "next/link";
 import { Grid3X3, SquarePlay, ContactRound, PanelTopClose } from 'lucide-react';
 import { styled } from 'styled-components'
 import { flexBox } from '@/style/styles/common'
 //layout component
-import LayoutHeader from "../component/Instagram/layout/Header"
-import LayoutGNB from "../component/Instagram/layout/GNB"
+import LayoutHeader from "../../component/Instagram/layout/Header"
+import LayoutGNB from "../../component/Instagram/layout/GNB"
 //content component
-import ContentHead from "../component/Instagram/profile/Head"
-import ContentFinder from "../component/Instagram/profile/Finder"
+import ContentHead from "../../component/Instagram/profile/Head"
+import ContentFinder from "../../component/Instagram/profile/Finder"
 // import ContentGallery from "../component/Instagram/profile/Gallery"
 //data
-import boardData from "../../../public/api/boardData"
+import boardData from "../../../../public/api/boardData"
 
 export default function UserDetailPage() {
-    const router = useRouter();
-    const { userId } = router.query; // useRouter().query.id도 사용 가능
+    
+    const { userId } = useParams; // useRouter().query.id도 사용 가능
     const [boardItems, setBoardItems] = useState([]);
     
     useEffect(() => {
         if (!userId) return;
+
         const fetchData = async () => {
             const userBoardItems = boardData.filter(item => item.userId === userId);
             setBoardItems(userBoardItems);
@@ -38,7 +39,7 @@ export default function UserDetailPage() {
 		<main>
             <LayoutHeader></LayoutHeader>
             {/* content */}
-            <ContentHead userPostAmount={46} userFollower={2} userFollowing={12} handleRecommend={handleFollow}></ContentHead>
+            <ContentHead userPostAmount={46} userFollower={2} userFollowing={12} toggleRecommend={handleFollow}></ContentHead>
             <section>
                 <RecommendTop>
                     <h3>사람 찾아보기</h3>

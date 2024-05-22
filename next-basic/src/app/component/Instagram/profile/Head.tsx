@@ -7,16 +7,16 @@ interface profileProps {
     userPostAmount: number;
     userFollower: number;
     userFollowing: number;
-    handleRecommend: () => void;
+    toggleRecommend: () => void;
 }
 
-export default function UserHead({userPostAmount, userFollower, userFollowing, handleRecommend}:profileProps) {
-    const [plusBtn, setPlusBtn] = useState(false);
+export default function UserHead({userPostAmount, userFollower, userFollowing, toggleRecommend}:profileProps) {
+    // const [plusBtn, setPlusBtn] = useState(false);
 
-    const toggleRecommend = () => {
-        setPlusBtn(plusBtn => !plusBtn);
-        handleRecommend();
-    }
+    // const toggleRecommend = () => {
+    //     setPlusBtn(plusBtn => !plusBtn);
+    //     handleRecommend();
+    // }
 
   return (
     <section>
@@ -36,7 +36,7 @@ export default function UserHead({userPostAmount, userFollower, userFollowing, h
         <UserUtilSec>
             <UserUtilBtn $height={'3.6rem'} as="a" href='/'>프로픨 편집</UserUtilBtn>
             <UserUtilBtn $height={'3.6rem'}>Messages</UserUtilBtn>
-            <UserUtilBtn $height={'3.6rem'} onClick={toggleRecommend}><UserPlus  fill={plusBtn ? 'white' : 'black'}/></UserUtilBtn>
+            <UserUtilBtn $height={'3.6rem'} onClick={toggleRecommend}><UserPlus /></UserUtilBtn>{/* fill={plusBtn ? 'white' : 'black'} */}
         </UserUtilSec>
     </section>
   )
