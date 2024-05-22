@@ -5,13 +5,14 @@ import { flexBox, DefaultBtn } from '@/style/styles/common'
 
 interface profileProps {
     userId: string;
+    userBio: string;
     userPostAmount: number;
     userFollower: number;
     userFollowing: number;
     toggleRecommend: () => void;
 }
 
-export default function UserHead({userId, userPostAmount, userFollower, userFollowing, toggleRecommend}:profileProps) {
+export default function UserHead({userId, userBio, userPostAmount, userFollower, userFollowing, toggleRecommend}:profileProps) {
     // const [plusBtn, setPlusBtn] = useState(false);
 
     // const toggleRecommend = () => {
@@ -19,31 +20,43 @@ export default function UserHead({userId, userPostAmount, userFollower, userFoll
     //     handleRecommend();
     // }
 
+    const formatNumber = (number) => {
+        if ( number >= 1000 && number <10000) {
+            return number.toLocaleString();
+        } else if (number >= 10000) {
+            return (number / 10000).toFixed(1)+'K';
+        }
+        return number.toString();
+    }
+
   return (
-    <section>
+    <UserProfile>
         <UserProfileTop>
             <UserProfileIco>
                 <img src={`/images/uploaded/${userId}/_profile.jpg`} alt=""/>
             </UserProfileIco>
             <UserProfileInfo>
-                <div><strong>{userPostAmount}</strong><span>게시물</span></div>
-                <div><strong>{userFollower}</strong><span>팔로워</span></div>
-                <div><strong>{userFollowing}</strong><span>팔로잉</span></div>
+                <div><strong>{formatNumber(userPostAmount)}</strong><span>게시물</span></div>
+                <div><strong>{formatNumber(userFollower)}</strong><span>팔로워</span></div>
+                <div><strong>{formatNumber(userFollowing)}</strong><span>팔로잉</span></div>
             </UserProfileInfo>
         </UserProfileTop>
         <UserProfileIntro>
-            <p>박소현, 개발자, 95년생</p>
+            {userBio}
         </UserProfileIntro>
         <UserUtilSec>
             <UserUtilBtn $height={'3.6rem'} as="a" href='/'>프로픨 편집</UserUtilBtn>
             <UserUtilBtn $height={'3.6rem'}>Messages</UserUtilBtn>
             <UserUtilBtn $height={'3.6rem'} onClick={toggleRecommend}><UserPlus /></UserUtilBtn>{/* fill={plusBtn ? 'white' : 'black'} */}
         </UserUtilSec>
-    </section>
+    </UserProfile>
   )
 }
 
 
+const UserProfile = styled.section`
+    padding: 0 1.6rem;
+`
 const UserProfileTop = styled.section`
     ${flexBox()};
 `

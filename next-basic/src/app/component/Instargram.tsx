@@ -64,6 +64,8 @@ export default function Instargram({ userId, userName, content, isLiked, likedCo
 
 const UserUtil = styled.div`
     ${flexBox({justify:'space-between'})}
+    height: 4.8rem;
+    padding: 0 .6rem;
 `
 const AlignCenter = styled.a`
     ${flexBox()};
