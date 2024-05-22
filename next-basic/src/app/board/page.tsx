@@ -9,17 +9,15 @@ import boardData from "../../../public/api/boardData"
 export default function Board() {
     const [boardItems, setBoardItems] = useState([]);
     const router = useRouter();
-    // 컴포넌트가 마운트될 때 JSON 데이터를 가져와서 boardItems 상태 변수에 설정합니다.
+    
     useEffect(() => {
         setBoardItems(boardData);
     }, []);
 
     const handleLikeToggle = (itemId) => {
         setBoardItems((prevBoardItems) => {
-            // 아이템의 좋아요 상태를 토글하여 새로운 배열을 생성합니다.
             return prevBoardItems.map((item, index) => {
                 if (index === itemId) {
-                    // isLiked 값에 따라 likedCount를 반대로 계산합니다.
                     const newLikedCount = item.isLiked ? item.likedCount + 1 : item.likedCount - 1;
                     return { ...item, isLiked: !item.isLiked, likedCount: newLikedCount };
                 }
@@ -29,7 +27,6 @@ export default function Board() {
     };
 
     const handleUserProfile = (userId) => {
-        console.log(userId);
         router.push(`/user/${userId}`);
     }
 
