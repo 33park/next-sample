@@ -4,13 +4,14 @@ import { styled } from 'styled-components'
 import { flexBox, DefaultBtn } from '@/style/styles/common'
 
 interface profileProps {
+    userId: string;
     userPostAmount: number;
     userFollower: number;
     userFollowing: number;
     toggleRecommend: () => void;
 }
 
-export default function UserHead({userPostAmount, userFollower, userFollowing, toggleRecommend}:profileProps) {
+export default function UserHead({userId, userPostAmount, userFollower, userFollowing, toggleRecommend}:profileProps) {
     // const [plusBtn, setPlusBtn] = useState(false);
 
     // const toggleRecommend = () => {
@@ -22,7 +23,7 @@ export default function UserHead({userPostAmount, userFollower, userFollowing, t
     <section>
         <UserProfileTop>
             <UserProfileIco>
-                <img src="/images/uploaded/Amanda12/_profile.jpg" alt=""/>
+                <img src={`/images/uploaded/${userId}/_profile.jpg`} alt=""/>
             </UserProfileIco>
             <UserProfileInfo>
                 <div><strong>{userPostAmount}</strong><span>게시물</span></div>

@@ -9,13 +9,11 @@ interface ImageProps {
 
 export default function UserGallery({userId,image}:ImageProps) {
     return (
-        <>
-            <GalleryItem>
-                <div>
+        <GalleryItem>
+            <div>
                 <img src={`/images/uploaded/${userId}/${image}.jpg`} alt={`Uploaded ${image}`} />
-                </div>
-            </GalleryItem>
-        </>
+            </div>
+        </GalleryItem>
     )
 }
 

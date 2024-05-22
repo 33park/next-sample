@@ -2,59 +2,62 @@
 import React,{useEffect, useState} from 'react'
 import { useParams } from 'next/navigation';
 import Link from "next/link";
-import { Grid3X3, SquarePlay, ContactRound, PanelTopClose } from 'lucide-react';
+import { Grid3X3, SquarePlay, ContactRound, PanelTopClose, Images  } from 'lucide-react';
 import { styled } from 'styled-components'
-import { flexBox } from '@/style/styles/common'
+import { flexBox, offSet } from '@/style/styles/common'
 //layout component
 import LayoutHeader from "../../component/Instagram/layout/Header"
 import LayoutGNB from "../../component/Instagram/layout/GNB"
 //content component
 import ContentHead from "../../component/Instagram/profile/Head"
 import ContentFinder from "../../component/Instagram/profile/Finder"
-// import ContentGallery from "../component/Instagram/profile/Gallery"
+import ContentGallery from "../../component/Instagram/profile/Gallery"
 //data
 import boardData from "../../../../public/api/boardData"
 
 export default function UserDetailPage() {
-    
-    const { userId } = useParams; // useRouter().query.id도 사용 가능
-    const [boardItems, setBoardItems] = useState([]);
-    
+    const { userId } = useParams();
+    const [userData, setUserData] = useState(null);
+
+
     useEffect(() => {
-        if (!userId) return;
-
-        const fetchData = async () => {
-            const userBoardItems = boardData.filter(item => item.userId === userId);
-            setBoardItems(userBoardItems);
+        if (userId){
+            const matchedUser = boardData.find(user => user.userId === userId);
+            setUserData(matchedUser);
         }
-
-        fetchData();
     }, [userId]);
 
-    const handleFollow = (index) => {
-        console.log(`Follow user at index ${index}`);
+    if (!userData) return <>Loading...</>
+
+    const handleFollow = () => {
     }
 
 	return (
 		<main>
             <LayoutHeader></LayoutHeader>
             {/* content */}
-            <ContentHead userPostAmount={46} userFollower={2} userFollowing={12} toggleRecommend={handleFollow}></ContentHead>
+            <ContentHead 
+                userId={userData.userId} 
+                userPostAmount={userData.upLoadedImage ? userData.upLoadedImage.length : 0} 
+                userFollower={userData.userFollower} 
+                userFollowing={userData.userFollowing} 
+                toggleRecommend={handleFollow}>
+            </ContentHead>
             <section>
                 <RecommendTop>
                     <h3>사람 찾아보기</h3>
                     <a href="">모두 보기</a>
                 </RecommendTop>
                 <RecommendWrapper>
-                    {boardItems.map((data, index)=>(
+                    추천탭
+                    {/* {boardItems.map((data, index)=>(
                         <ContentFinder
                             key={`${data.userId}${index}`}
                             userId={data.userId}
                             userName={data.userName}
                             onUserFollow={() => handleFollow(index)}>
-
-                            </ContentFinder>
-                    ))}
+                        </ContentFinder>
+                    ))} */}
                 </RecommendWrapper>
             </section>
             <TabNavigation>
@@ -64,11 +67,16 @@ export default function UserDetailPage() {
                 <Link href="/"><ContactRound /></Link>
             </TabNavigation>
             <GalleryTable>
-                {/* <ContentGallery
-                    key={`${data.userId}-${index}`}
-                    userId={data.userId}
-                    upLoadImage={data.upLoadedImage}
-                ></ContentGallery> */}
+                {userData.upLoadedImage && userData.upLoadedImage.map((image, index) => (
+                    <li key={index}>
+                        {image.length > 1 && (
+                            <i><Images stroke={'white'}/></i>
+                        )}
+                        <div>
+                            <img src={`/images/uploaded/${userData.userId}/${image}.jpg`} alt="" />
+                        </div>
+                    </li>
+                ))}
             </GalleryTable>
             {/* //content */}
             <LayoutGNB></LayoutGNB>
@@ -121,17 +129,20 @@ const GalleryTable = styled.ul`
         ${flexBox({})}
         flex-wrap: wrap;
         li {
+            ${offSet()}
             width: 33.3%;
+            i {
+                ${offSet({position:'absolute', top: '1rem', right: '1rem'})}
+                z-index: 1;
+            }
             div {
-                position: relative;
+                ${offSet()}
                 width: 100%;
                 height: 0;
                 padding-bottom: 100%;
                 overflow: hidden;
                 img {
-                    position: absolute;
-                    top:0;
-                    left:0;
+                    ${offSet({position:'absolute', top: '0', left: '0'})}
                     display: block;
                     width: 100%;
                     height: 100%;
