@@ -1,39 +1,67 @@
 'use client'
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Link from "next/link";
-import { Grid3X3, SquarePlay,ContactRound,PanelTopClose,ChevronDown    } from 'lucide-react';
+import { Grid3X3, SquarePlay,ContactRound,PanelTopClose,UserPlus     } from 'lucide-react';
 import { styled } from 'styled-components'
 import { flexBox, DefaultBtn } from '@/style/styles/common'
-import boardData from "api/boardData.js"
-import DropDown from '../button/DropDown';
+import RecommendList from './RecommendList';
+import boardData from "../../../../public/api/boardData"
 
 
 export default function InnerContent() {
+    const [boardItems, setBoardItems] = useState([]);
+    useEffect(() => {
+        setBoardItems(boardData);
+    }, []);
+
+    const [recomSec, setRecomSec] = useState(true);
+
+    const toggleRecommend = ()=>{
+        setRecomSec(recomSec => !recomSec);
+    }
+    const getUserFollow = (name) => {
+        alert(`${name}를 팔로우합니다!`)
+    }
     
     return (
-        <main>
+        <section>
             <ContentHead>
                 <UserProfileTop>
                     <UserProfileIco>
                         <img src="/images/uploaded/Amanda12/_profile.jpg" alt=""/>
                     </UserProfileIco>
                     <UserProfileInfo>
-                        <div><strong>1,739</strong><span>Posts</span></div>
-                        <div><strong>715K</strong><span>Followers</span></div>
-                        <div><strong>164</strong><span>Following</span></div>
+                        <div><strong>46</strong><span>게시물</span></div>
+                        <div><strong>5</strong><span>팔로워</span></div>
+                        <div><strong>25</strong><span>팔로잉</span></div>
                     </UserProfileInfo>
                 </UserProfileTop>
                 <UserProfileIntro>
                     <p>박소현, 개발자, 95년생</p>
                 </UserProfileIntro>
                 <UserUtilSec>
-                    <DropDown btnHeight={'3.6rem'} placeHolderTxt={'팔로잉'} DropDownList={['메세지','환경설정']}/>
+                    <UserUtilBtn $height={'3.6rem'} as="a" href='/'>프로픨 편집</UserUtilBtn>
                     <UserUtilBtn $height={'3.6rem'}>Messages</UserUtilBtn>
-                    <UserUtilBtn $height={'3.6rem'} ><ChevronDown /></UserUtilBtn>
+                    <UserUtilBtn $height={'3.6rem'} onClick={toggleRecommend}><UserPlus  fill={recomSec ? 'white' : 'black'}/></UserUtilBtn>
                 </UserUtilSec>
-                <section>
-                    recommend
-                </section>
+                {recomSec && (
+                    <section>
+                        <RecommendTop>
+                            <h3>사람 찾아보기</h3>
+                            <a href="">모두 보기</a>
+                        </RecommendTop>
+                        <RecommendWrapper>
+                            {boardItems.map((data)=>(
+                                <RecommendList
+                                    key={data.userId}
+                                    userId={data.userId}
+                                    userName={data.userName}
+                                    onUserFollow={() => getUserFollow(data.userName)}
+                                ></RecommendList>
+                            ))}
+                        </RecommendWrapper>
+                    </section>
+                )}
             </ContentHead>
             <TabNavigation>
                 <Link href="/"><Grid3X3/></Link>
@@ -63,7 +91,7 @@ export default function InnerContent() {
                     </div>
                 </li>
             </GalleryTable>
-        </main>
+        </section>
     )
 }
 
@@ -117,6 +145,11 @@ const TabNavigation = styled.nav`
             flex:1;
             height: 6rem;
             ${flexBox({justify:'center', align: 'center'})}
+            &:hover, &:visited, &:link, &:active
+            {
+                color: inherit;
+                text-decoration: none;
+            }
             svg {
                 width: 2rem;
             }
@@ -156,8 +189,33 @@ const UserUtilSec = styled.section`
 
 const UserUtilBtn = styled.button<{ $height: string}>`
     ${props => DefaultBtn({ height: props.$height })};
-    
+    font-size: 1.4rem;
+    text-decoration: none;
     svg {
         width: 2rem;
+    }
+`
+const RecommendTop = styled.div`
+    ${flexBox({justify: 'space-between'})}
+    padding: 2rem 0 1rem;
+    h3 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    a {
+        font-size: 1.6rem;
+        color: #00a0ff;
+        text-decoration: underline;
+    }
+`
+const RecommendWrapper = styled.ul`
+    display: flex;
+    width: 100%;
+    gap:1rem;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
     }
 `

@@ -1,8 +1,11 @@
 "use client";
 import {useSearchParams, usePathname} from "next/navigation";
 import Link from "next/link";
+interface ModalProps {
+    title: string,
+}
 
-export default function Modal({title, children}){
+export default function Modal({title, children}:ModalProps){
     const searchParams = useSearchParams();
     const modal = searchParams.get("modal");
     const pathname = usePathname();
