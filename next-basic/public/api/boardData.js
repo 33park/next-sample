@@ -39,7 +39,7 @@ const COMMENTDATA = [
 		likedCount: 20,
 		userFollower: 456,
 		userFollowing: 987,
-		boardData: ["03"],
+		upLoadedImage: ["03"],
 	},
 	{
 		userId: "1000000chris",
