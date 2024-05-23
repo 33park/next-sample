@@ -9,16 +9,12 @@ interface profileProps {
     userPostAmount: number;
     userFollower: number;
     userFollowing: number;
-    toggleRecommend: () => void;
+    handleState: () => void;
+    activeBtn: boolean;
 }
 
-export default function UserHead({userId, userBio, userPostAmount, userFollower, userFollowing, toggleRecommend}:profileProps) {
-    // const [plusBtn, setPlusBtn] = useState(false);
-
-    // const toggleRecommend = () => {
-    //     setPlusBtn(plusBtn => !plusBtn);
-    //     handleRecommend();
-    // }
+export default function UserHead({userId, userBio, userPostAmount, userFollower, userFollowing, handleState, activeBtn}:profileProps) {
+    // const [isActive, setIsActive] = useState(true);
 
     const formatNumber = (number) => {
         if ( number >= 1000 && number <10000) {
@@ -28,6 +24,10 @@ export default function UserHead({userId, userBio, userPostAmount, userFollower,
         }
         return number.toString();
     }
+
+    // const toggleActive = () => {
+    //     setIsActive(!isActive); 
+    // }
 
   return (
     <UserProfile>
@@ -47,7 +47,7 @@ export default function UserHead({userId, userBio, userPostAmount, userFollower,
         <UserUtilSec>
             <UserUtilBtn $height={'3.6rem'} as="a" href='/'>프로픨 편집</UserUtilBtn>
             <UserUtilBtn $height={'3.6rem'}>Messages</UserUtilBtn>
-            <UserUtilBtn $height={'3.6rem'} onClick={toggleRecommend}><UserPlus /></UserUtilBtn>{/* fill={plusBtn ? 'white' : 'black'} */}
+            <UserUtilBtn $height={'3.6rem'} onClick={() => {handleState()}}><UserPlus fill={ activeBtn ? 'white' : 'black'}/></UserUtilBtn>{/* fill={plusBtn ? 'white' : 'black'} */}
         </UserUtilSec>
     </UserProfile>
   )

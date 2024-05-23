@@ -8,11 +8,12 @@ interface FinderProps {
     userId: string;
     userName: string;
     onUserFollow: () => void;
+    onDelete: () => void;
 }
-export default function UserFinder({userId, userName, onUserFollow}:FinderProps) {
+export default function UserFinder({userId, userName, onUserFollow, onDelete}:FinderProps) {
   return (
     <RecomList>
-        <EleCloseBtn><CloseBtn stroke={theme.colors.dark}/></EleCloseBtn>
+        <EleCloseBtn onClick={onDelete}><CloseBtn stroke={theme.colors.dark}/></EleCloseBtn>
         <ProfileThumb>
             <div>
                 <img src={`/images/uploaded/${userId}/_profile.jpg`} alt=""/>
@@ -30,7 +31,7 @@ const RecomList = styled.li`
     ${flexBox()}
     flex-direction: column;
     flex:none;
-    width: 33vw;
+    width: 33%;
     padding: 1rem;
     background-color: ${theme.colors.light};
     border-radius: .5rem;
@@ -50,9 +51,9 @@ const ProfileThumb = styled.div`
     div {
         ${offSet({position:'relative'})}
         display: block;
-        width: 75%;
+        width: 65%;
         height: 0%;
-        padding-bottom: 75%;
+        padding-bottom: 65%;
         border-radius: 10rem;
         margin: 0 auto;
         background-color: ${theme.colors.gray};

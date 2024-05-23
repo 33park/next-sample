@@ -58,11 +58,11 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
 
-   /*  a:hover, a:visited, a:link, a:active
+    a:hover, a:visited, a:link, a:active
     {
-        color: inherit;
+        color: unset;
         text-decoration: none;
-    } */
+    }
     
     input {
         padding: 0;

@@ -17,54 +17,72 @@ import boardData from "../../../../public/api/boardData"
 
 
 export default function UserDetailPage() {
-    const router = useRouter();
     const { userId } = useParams();
+    const router = useRouter();
     const [userData, setUserData] = useState(null);
-
+    const [showRecommend,setShowRecommend] = useState(true);
+    const [recommendData, setRecommendData] = useState([]);
 
     useEffect(() => {
         if (userId){
             const matchedUser = boardData.find(user => user.userId === userId);
             setUserData(matchedUser);
+            if(matchedUser){
+                const unMatchedUSer = boardData.filter((user) => user.userId !== userId);
+                setRecommendData(unMatchedUSer);
+            }else {
+                console.log('No matching user data found');
+                
+            }
         }
     }, [userId]);
 
-    if (!userData) return <>Loading...</>
-
-    const handleFollow = () => {
+    const routerBackBFn = () => {
         router.back();
-        
     }
 
+    const toggleRecommendSection = () => {
+        if(recommendData.length <= 0){
+            setShowRecommend(false);
+        }
+        setShowRecommend(showRecommend => !showRecommend)
+    }
+    const deleteRecomFn = (userId) => {
+        setRecommendData(recommendData.filter((user) => user.userId !== userId));
+    }
+
+    if (!userData) return <>Loading...</>
 	return (
 		<MainContainer>
-            <LayoutHeader userId={userData.userId} historyBackFn={handleFollow}></LayoutHeader>
+            <LayoutHeader userId={userData.userId} historyBackFn={routerBackBFn}></LayoutHeader>
             {/* content */}
             <ContentHead 
                 userId={userData.userId} 
                 userBio={userData.content} 
                 userPostAmount={userData.upLoadedImage ? userData.upLoadedImage.length : 0} 
                 userFollower={userData.userFollower} 
-                userFollowing={userData.userFollowing} 
-                toggleRecommend={handleFollow}>
+                userFollowing={userData.userFollowing}
+                handleState={toggleRecommendSection}
+                activeBtn={showRecommend}>
             </ContentHead>
-            <ContentFinder>
+            {showRecommend && recommendData.length > 0 && (<ContentFinder>
                 <RecommendTop>
                     <h3>사람 찾아보기</h3>
                     <a href="">모두 보기</a>
                 </RecommendTop>
                 <RecommendWrapper>
-                    추천탭
-                    {/* {boardItems.map((data, index)=>(
-                        <ContentFinder
+                    {recommendData.map((data, index)=>(
+                        <FinderList
                             key={`${data.userId}${index}`}
                             userId={data.userId}
                             userName={data.userName}
-                            onUserFollow={() => handleFollow(index)}>
-                        </ContentFinder>
-                    ))} */}
+                            onUserFollow={() => alert('not now!')}
+                            onDelete={() => deleteRecomFn(data.userId)}
+                            >
+                        </FinderList>
+                    ))}
                 </RecommendWrapper>
-            </ContentFinder>
+            </ContentFinder>)}
             <TabNavigation>
                 <Link href="/"><Grid3X3/></Link>
                 <Link href="/"><SquarePlay /></Link>

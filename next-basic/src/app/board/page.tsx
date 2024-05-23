@@ -7,8 +7,8 @@ import Instargram from '@/app/component/Instargram'
 import boardData from "../../../public/api/boardData"
 
 export default function Board() {
-    const [boardItems, setBoardItems] = useState([]);
     const router = useRouter();
+    const [boardItems, setBoardItems] = useState([]);
     
     useEffect(() => {
         setBoardItems(boardData);
