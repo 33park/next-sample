@@ -3,6 +3,7 @@
 import React,{useState, useEffect} from 'react'
 import { styled } from 'styled-components'
 import { useRouter } from 'next/navigation';
+import LayoutGNB from "@/app/component/Instagram/layout/GNB"
 import Instargram from '@/app/component/Instargram'
 import boardData from "../../../public/api/boardData"
 

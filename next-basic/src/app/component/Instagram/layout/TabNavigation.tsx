@@ -1,21 +1,21 @@
 import React from 'react'
 import Link from "next/link";
 import { styled } from 'styled-components'
-import { flexBox } from '@/style/styles/common';
-import { Grid3X3, SquarePlay, PanelTopClose, ContactRound  } from 'lucide-react';
+import { flexBox } from '@/style/styles/common'
+import { Grid3X3, SquarePlay, ContactRound, PanelTopClose  } from 'lucide-react';
 
-export default function UserTab() {
+export default function TabNavigation() {
   return (
-    <TabNavigation>
+    <Tab>
         <Link href="/"><Grid3X3/></Link>
         <Link href="/"><SquarePlay /></Link>
         <Link href="/"><PanelTopClose/></Link>
         <Link href="/"><ContactRound /></Link>
-    </TabNavigation>
+    </Tab>
   )
 }
 
-const TabNavigation = styled.nav`
+const Tab = styled.nav`
     ${flexBox()};
         a {
             flex:1;

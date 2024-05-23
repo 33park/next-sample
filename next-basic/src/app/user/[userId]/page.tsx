@@ -1,17 +1,17 @@
 'use client'
 import React,{useEffect, useState} from 'react'
 import { useRouter, useParams } from 'next/navigation';
-import Link from "next/link";
-import { Grid3X3, SquarePlay, ContactRound, PanelTopClose, Images  } from 'lucide-react';
+import { Images  } from 'lucide-react';
 import { styled } from 'styled-components'
 import { flexBox, offSet } from '@/style/styles/common'
 //layout component
-import LayoutHeader from "../../component/Instagram/layout/Header"
-import LayoutGNB from "../../component/Instagram/layout/GNB"
+import LayoutHeader from "@/app/component/Instagram/layout/Header"
+import LayoutGNB from "@/app/component/Instagram/layout/GNB"
 //content component
-import ContentHead from "../../component/Instagram/profile/Head"
-import FinderList from "../../component/Instagram/profile/Finder"
-import ContentGallery from "../../component/Instagram/profile/Gallery"
+import RouterBack from "@/app/component/button/RouterBack"
+import ContentHead from "@/app/component/Instagram/profile/Head"
+import FinderList from "@/app/component/Instagram/profile/Finder"
+import TabNav from "@/app/component/Instagram/profile/Tab"
 //data
 import boardData from "../../../../public/api/boardData"
 
@@ -54,7 +54,9 @@ export default function UserDetailPage() {
     if (!userData) return <>Loading...</>
 	return (
 		<MainContainer>
-            <LayoutHeader userId={userData.userId} historyBackFn={routerBackBFn}></LayoutHeader>
+            <LayoutHeader userId={userData.userId} historyBackFn={routerBackBFn}>
+                <RouterBack></RouterBack>
+            </LayoutHeader>
             {/* content */}
             <ContentHead 
                 userId={userData.userId} 
@@ -65,7 +67,8 @@ export default function UserDetailPage() {
                 handleState={toggleRecommendSection}
                 activeBtn={showRecommend}>
             </ContentHead>
-            {showRecommend && recommendData.length > 0 && (<ContentFinder>
+            {showRecommend && recommendData.length > 0 && (
+            <ContentFinder>
                 <RecommendTop>
                     <h3>사람 찾아보기</h3>
                     <a href="">모두 보기</a>
@@ -83,12 +86,7 @@ export default function UserDetailPage() {
                     ))}
                 </RecommendWrapper>
             </ContentFinder>)}
-            <TabNavigation>
-                <Link href="/"><Grid3X3/></Link>
-                <Link href="/"><SquarePlay /></Link>
-                <Link href="/"><PanelTopClose/></Link>
-                <Link href="/"><ContactRound /></Link>
-            </TabNavigation>
+            <TabNav></TabNav>
             <GalleryTable>
                 {userData.upLoadedImage && userData.upLoadedImage.map((image, index) => (
                     <li key={index}>
@@ -113,12 +111,11 @@ const MainContainer = styled.main`
 `
 
 const ContentFinder = styled.section`
-    padding: 0 2rem;
 `
 
 const RecommendTop = styled.div`
     ${flexBox({justify: 'space-between'})}
-    padding: 2rem 0 1rem;
+    padding: 2rem 1rem 1rem;
     h3 {
         font-size: 2rem;
         font-weight: bold;
@@ -141,22 +138,7 @@ const RecommendWrapper = styled.ul`
         height: 0;
     }
 `
-const TabNavigation = styled.nav`
-    ${flexBox()};
-        a {
-            flex:1;
-            height: 6rem;
-            ${flexBox({justify:'center', align: 'center'})}
-            &:hover, &:visited, &:link, &:active
-            {
-                color: inherit;
-                text-decoration: none;
-            }
-            svg {
-                width: 2rem;
-            }
-        }
-`
+
 const GalleryTable = styled.ul`
         z-index: 0;
         ${flexBox({})}

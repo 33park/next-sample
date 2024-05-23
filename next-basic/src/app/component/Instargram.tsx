@@ -1,8 +1,9 @@
 'use client'
 
-import React,{useRef, useState} from 'react'
+import React,{useState} from 'react'
 import { styled } from 'styled-components'
-import { Heart, MoreHorizontal  } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Heart, MessageCircle, Send, MoreHorizontal  } from 'lucide-react';
 import { flexBox } from '@/style/styles/common';
 
 interface BoardProps {
@@ -19,10 +20,15 @@ interface BoardProps {
 
 
 export default function Instargram({ userId, userName, content, isLiked, likedCount, upLoadedImage, onUserRoute, onLikeToggle, onEdit }: BoardProps ) {
+    const router = useRouter();
     const [openEdit, setOpenEdit] = useState(false);
     
     const toggleEdit = ()=>{
         setOpenEdit(prev => !prev);
+    }
+
+    const routerPushFn = (path: string, userId: string) => {
+        router.push(`/${path}/${userId}`);
     }
 
     return (
@@ -44,13 +50,16 @@ export default function Instargram({ userId, userName, content, isLiked, likedCo
                         ))}
                     </ImageWrapper>
                 </ImageContainer>
-                <RightCenter>
-                    <LikedIcon onClick={onLikeToggle}>
-                        <Heart fill={isLiked ? 'gray' : 'red'} stroke={`transparent`}/>
-                        {/* <Heart onLikeToggle={onLikeToggle}/> */}
-                    </LikedIcon>
-                    <span>{likedCount}</span>
-                </RightCenter>
+                <UserAction>
+                    <ActionWrapper>
+                        <ActionIcon onClick={onLikeToggle}>
+                            <Heart fill={isLiked ? 'gray' : 'red'} stroke={`transparent`}/>
+                        </ActionIcon>
+                        <ActionIcon onClick={() => routerPushFn('comment',userId)}><MessageCircle /></ActionIcon>
+                        <ActionIcon onClick={() => routerPushFn('message',userId)}><Send /></ActionIcon>
+                    </ActionWrapper>
+                </UserAction>
+                <p>좋아요 {likedCount}개</p>
                 <UserComment><strong>{userId}</strong>{content}</UserComment>
                 {openEdit && (
                     <EditBox>
@@ -71,8 +80,8 @@ const AlignCenter = styled.a`
     ${flexBox()};
     cursor: pointer;
 `
-const RightCenter = styled.p`
-    ${flexBox({justify:'flex-end'})}
+const UserAction = styled.div`
+    ${flexBox({})}
     padding: 0 0 .8rem;
 `
 
@@ -127,17 +136,23 @@ const ThumbnailImage = styled.img`
     height: 100%;
     object-fit: cover;
 `
-
-const LikedIcon = styled.i`
+const ActionWrapper = styled.section`
+    width: 100%;
+    display: inline-flex;
+    ${flexBox({align: 'center'})}
+`
+const ActionIcon = styled.div`
     flex:none;
     position: relative;
-    display: inline-flex;
-    ${flexBox({justify:'center', align: 'center'})}
+    display: block;
     width: 2.4rem;
     height: 2.4rem;
     margin-right: .4rem;
     font-size: 2rem;
     cursor: pointer;
+    svg {
+        flex:none;
+    }
 `
 const UserComment = styled.p`
     line-height: 1.25;
