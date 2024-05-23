@@ -55,7 +55,7 @@ export default function UserDetailPage() {
 	return (
 		<MainContainer>
             <LayoutHeader userId={userData.userId} historyBackFn={routerBackBFn}>
-                <RouterBack></RouterBack>
+                <RouterBack routerPath={''}></RouterBack>
             </LayoutHeader>
             {/* content */}
             <ContentHead 

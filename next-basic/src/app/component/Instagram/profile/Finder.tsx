@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components'
 import { flexBox,offSet, DefaultBtn } from '@/style/styles/common'
 import { X as CloseBtn } from 'lucide-react';
@@ -11,19 +12,20 @@ interface FinderProps {
     onDelete: () => void;
 }
 export default function UserFinder({userId, userName, onUserFollow, onDelete}:FinderProps) {
-  return (
-    <RecomList>
-        <EleCloseBtn onClick={onDelete}><CloseBtn stroke={theme.colors.dark}/></EleCloseBtn>
-        <ProfileThumb>
-            <div>
-                <img src={`/images/uploaded/${userId}/_profile.jpg`} alt=""/>
-            </div>
-        </ProfileThumb>
-        <UserName>{userName}</UserName>
-        <Recomment>회원님을<br/>위한 추천</Recomment>
-        <FollowBtn onClick={onUserFollow}>팔로우</FollowBtn>
-    </RecomList>
-  )
+    const router = useRouter();
+    return (
+        <RecomList>
+            <EleCloseBtn onClick={onDelete}><CloseBtn stroke={theme.colors.dark}/></EleCloseBtn>
+            <ProfileThumb onClick={()=>{router.push(`/user/${userId}`)}}>
+                <div>
+                    <img src={`/images/uploaded/${userId}/_profile.jpg`} alt=""/>
+                </div>
+            </ProfileThumb>
+            <UserName>{userName}</UserName>
+            <Recomment>회원님을<br/>위한 추천</Recomment>
+            <FollowBtn onClick={onUserFollow}>팔로우</FollowBtn>
+        </RecomList>
+    )
 }
 
 const RecomList = styled.li`
@@ -58,6 +60,7 @@ const ProfileThumb = styled.div`
         margin: 0 auto;
         background-color: ${theme.colors.gray};
         overflow: hidden;
+        cursor: pointer;
         img {
             ${offSet({position: 'absolute'})}
             width: 100%;
