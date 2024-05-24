@@ -3,12 +3,11 @@
 import React, {Suspense} from 'react'
 import { Reset } from 'styled-reset'
 import { ThemeProvider } from 'styled-components'
-import GlobalNavigator from './component/GNB'
 import { GlobalStyles } from '../style/GlobalStyles'
 import { theme } from '../style/styles/theme'
 import { Noto_Sans_KR } from 'next/font/google'
 import Modal from './component/Modal'
-
+import LayoutFooter from './component/layout/GNB'
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ['latin'],
@@ -28,7 +27,7 @@ export default function RootLayout({
                     <Reset/>
                     <GlobalStyles/>
                     <body className={`${notoSansKr.className}`}>
-                        <GlobalNavigator/>
+                        <LayoutFooter></LayoutFooter>
                         {children}
                         <Suspense fallback={<>Loading...</>}>
                             <Modal/>
