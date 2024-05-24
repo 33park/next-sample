@@ -6,13 +6,13 @@ import { styled } from 'styled-components'
 import { flexBox, offSet } from '@/style/styles/common'
 
 //content component
-import LayoutHeader from '@/app/_component/layout/Header'
-import RouterBack from "@/app/_component/button/RouterBack"
-import ContentHead from "@/app/_component/profile/Head"
-import FinderList from "@/app/_component/profile/Finder"
-import TabNav from "@/app/_component/profile/Tab"
+import LayoutHeader from '@/app/components/layout/Header'
+import RouterBack from "@/app/components/button/RouterBack"
+import ContentHead from "@/app/components/profile/Head"
+import FinderList from "@/app/components/profile/Finder"
+import TabNav from "@/app/components/profile/Tab"
 //data
-import boardData from "../../../../public/api/boardData"
+import boardData from "../../../apis/boardData"
 
 
 export default function UserDetailPage() {

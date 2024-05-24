@@ -3,13 +3,13 @@
 import React, {Suspense} from 'react'
 import { Reset } from 'styled-reset'
 import { ThemeProvider } from 'styled-components'
-import GlobalNavigator from './_component/GNB'
+import GlobalNavigator from '../components/GNB'
 import { GlobalStyles } from '@/style/GlobalStyles'
 import { offSet } from '@/style/styles/common'
 import { theme } from '@/style/styles/theme'
 import { Noto_Sans_KR } from 'next/font/google'
 import { styled } from 'styled-components'
-import Modal from './_component/Modal'
+import Modal from '../components/Modal'
 
 
 

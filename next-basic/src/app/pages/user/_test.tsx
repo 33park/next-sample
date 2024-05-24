@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import styled from 'styled-components';
-import boardData from "../../../public/api/boardData"
+import boardData from "../../apis/boardData"
 
 const EditPage = () => {
     const router = useRouter();

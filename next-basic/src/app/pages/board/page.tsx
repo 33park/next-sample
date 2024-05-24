@@ -3,9 +3,9 @@
 import React,{useState, useEffect} from 'react'
 import { styled } from 'styled-components'
 import { useRouter } from 'next/navigation';
-import Instargram from '@/app/_component/Instargram'
-import boardData from "../../../public/api/boardData"
-import FooterGnb from '@/app/_component/layout/GNB'
+import Instargram from '@/app/components/Instargram'
+import boardData from "../../../apis/boardData"
+import FooterGnb from '@/app/components/layout/GNB'
 
 export default function Board() {
     const router = useRouter();
