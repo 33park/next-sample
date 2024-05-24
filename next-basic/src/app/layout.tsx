@@ -6,8 +6,8 @@ import { ThemeProvider } from 'styled-components'
 import { GlobalStyles } from '../style/GlobalStyles'
 import { theme } from '../style/styles/theme'
 import { Noto_Sans_KR } from 'next/font/google'
-import Modal from './component/Modal'
-import LayoutFooter from './component/layout/GNB'
+import Modal from './_component/Modal'
+import LayoutFooter from './_component/layout/GNB'
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ['latin'],
@@ -23,17 +23,15 @@ export default function RootLayout({
 
         return (
             <ThemeProvider theme={theme}>
-                <html lang="ko">
-                    <Reset/>
-                    <GlobalStyles/>
-                    <body className={`${notoSansKr.className}`}>
-                        <LayoutFooter></LayoutFooter>
-                        {children}
-                        <Suspense fallback={<>Loading...</>}>
-                            <Modal/>
-                        </Suspense>
-                    </body> 
-                </html>
+                <Reset/>
+                <GlobalStyles/>
+                <section className={`${notoSansKr.className}`}>
+                    <LayoutFooter></LayoutFooter>
+                    {children}
+                    <Suspense fallback={<>Loading...</>}>
+                        <Modal title={'test'}/>
+                    </Suspense>
+                </section> 
             </ThemeProvider>
         );
 }

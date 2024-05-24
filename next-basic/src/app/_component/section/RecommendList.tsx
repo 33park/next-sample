@@ -12,7 +12,7 @@ interface ListProps {
 
 export default function RecommendList({userId, userName, onUserFollow}: ListProps): React.JSX.Element {
     return (
-        <RecomList>
+        <RecommendList>
             <EleCloseBtn><CloseBtn stroke={theme.colors.dark}/></EleCloseBtn>
             <ProfileThumb>
                 <div>
@@ -20,16 +20,16 @@ export default function RecommendList({userId, userName, onUserFollow}: ListProp
                 </div>
             </ProfileThumb>
             <UserName>{userName}</UserName>
-            <Recomment>회원님을<br/>위한 추천</Recomment>
+            <RecommendTitle>회원님을<br/>위한 추천</RecommendTitle>
             <FollowBtn onClick={onUserFollow}>팔로우</FollowBtn>
-        </RecomList>
+        </RecommendList>
     )
 }
 
 
 
 
-const RecomList = styled.li`
+const RecommendList = styled.li`
     ${offSet({position:'relative'})}
     ${flexBox()}
     flex-direction: column;
@@ -77,7 +77,7 @@ const UserName = styled.p`
     padding: 0.4rem 0 0 0;
 `
 
-const Recomment = styled.p`
+const RecommendTitle = styled.p`
     max-width: 50%;
     font-size: 1.4rem;
     color: ${theme.colors.gray};

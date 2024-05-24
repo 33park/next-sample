@@ -3,7 +3,7 @@
 import React,{useState, useEffect} from 'react'
 import { styled } from 'styled-components'
 import { useRouter } from 'next/navigation';
-import Instargram from '@/app/component/Instargram'
+import Instargram from '@/app/_component/Instargram'
 import boardData from "../../../public/api/boardData"
 
 export default function Board() {

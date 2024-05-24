@@ -6,10 +6,10 @@ import { styled } from 'styled-components'
 import { flexBox, offSet } from '@/style/styles/common'
 
 //content component
-import RouterBack from "@/app/component/button/RouterBack"
+import RouterBack from "@/app/_component/button/RouterBack"
 import ContentHead from "@/app/component/Instagram/profile/Head"
-import FinderList from "@/app/component/Instagram/profile/Finder"
-import TabNav from "@/app/component/Instagram/profile/Tab"
+import FinderList from "@/app/profile/Finder"
+import TabNav from "@/app/profile/Tab"
 //data
 import boardData from "../../../../public/api/boardData"
 

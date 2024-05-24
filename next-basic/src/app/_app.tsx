@@ -3,7 +3,7 @@
 import React from 'react'
 import Layout from './layout'
 
-export default function Page() {
+export default function App() {
     return (
         <Layout>
         op
