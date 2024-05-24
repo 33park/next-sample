@@ -18,7 +18,7 @@ export default function GNB({userId}:FooterProps) {
         <Link href='/'><Search /></Link>
         <Link href='/'><SquarePlus /></Link>
         <Link href='/'><SquarePlay /></Link>
-        <Link href='/'><i><img src={`/images/user/${userId}/_profile.jpg`} alt={userId} /></i></Link>
+        {/* <Link href='/'><i><img src={`/images/user/${userId}/_profile.jpg`} alt={userId} /></i></Link> */}
     </FooterSection>
   )
 }

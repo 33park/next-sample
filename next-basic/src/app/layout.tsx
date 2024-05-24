@@ -27,12 +27,13 @@ export default function RootLayout({
 
         return (
             <ThemeProvider theme={theme}>
-                <html lang="ko">
-                    <Reset/>
-                    <GlobalStyles/>
+                <HtmlSection lang="ko">
+                    <head>
+                        <Reset/>
+                        <GlobalStyles/>
+                    </head>
                     <BodySection className={`${notoSansKr.className}`}>
                         <MainSection>
-
                             <GlobalNavigator/>
                             {children}
                             <Suspense fallback={<>Loading...</>}>
@@ -40,17 +41,19 @@ export default function RootLayout({
                             </Suspense>
                         </MainSection>
                     </BodySection> 
-                </html>
+                </HtmlSection>
             </ThemeProvider>
         );
 }
 
+const HtmlSection = styled.html`
+    
+`
+
 const BodySection = styled.body`
-    ${offSet()};
-    max-width: 46rem;
-    margin: 0 auto;
 `
 
 const MainSection = styled.main`
-
+    max-width: 46rem;
+    margin: 0 auto;
 `

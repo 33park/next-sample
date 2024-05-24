@@ -16,11 +16,12 @@ interface BoardProps {
     upLoadedImage: string[];
     onUserRoute: () => void;
     onLikeToggle: () => void;
+    onOpenComment: () => void;
     onEdit: () => void;
 }
 
 
-export default function Instargram({ userId, userName, content, isLiked, likedCount, upLoadedImage, onUserRoute, onLikeToggle, onEdit }: BoardProps ) {
+export default function Instargram({ userId, userName, content, isLiked, likedCount, upLoadedImage, onUserRoute, onLikeToggle, onOpenComment, onEdit }: BoardProps ) {
     const router = useRouter();
     const [openEdit, setOpenEdit] = useState(false);
     
@@ -56,7 +57,7 @@ export default function Instargram({ userId, userName, content, isLiked, likedCo
                         <ActionIcon onClick={onLikeToggle}>
                             <Heart fill={isLiked ? theme.colors.gray : theme.colors.red} stroke={`transparent`}/>
                         </ActionIcon>
-                        <ActionIcon onClick={() => routerPushFn('comment',userId)}><MessageCircle /></ActionIcon>
+                        <ActionIcon onClick={onOpenComment}><MessageCircle /></ActionIcon>
                         <ActionIcon onClick={() => routerPushFn('message',userId)}><Send /></ActionIcon>
                     </ActionWrapper>
                 </UserAction>
