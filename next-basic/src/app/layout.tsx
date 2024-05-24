@@ -9,6 +9,7 @@ import { theme } from '../style/styles/theme'
 import { Noto_Sans_KR } from 'next/font/google'
 import Modal from './component/Modal'
 
+
 const notoSansKr = Noto_Sans_KR({
     subsets: ['latin'],
     weight: ['100', '400', '700', '900'],

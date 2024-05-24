@@ -9,6 +9,7 @@ const colors = {
 
     alert:'#6295D9',
 
+    red:'#ff0000',
     black:'#000',
     white:'#fff',
     transparent: 'transparent',

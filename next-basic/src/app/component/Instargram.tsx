@@ -5,6 +5,7 @@ import { styled } from 'styled-components'
 import { useRouter } from 'next/navigation';
 import { Heart, MessageCircle, Send, MoreHorizontal  } from 'lucide-react';
 import { flexBox } from '@/style/styles/common';
+import { theme } from '@/style/styles/theme';
 
 interface BoardProps {
     userId: number;
@@ -53,7 +54,7 @@ export default function Instargram({ userId, userName, content, isLiked, likedCo
                 <UserAction>
                     <ActionWrapper>
                         <ActionIcon onClick={onLikeToggle}>
-                            <Heart fill={isLiked ? 'gray' : 'red'} stroke={`transparent`}/>
+                            <Heart fill={isLiked ? theme.colors.gray : theme.colors.red} stroke={`transparent`}/>
                         </ActionIcon>
                         <ActionIcon onClick={() => routerPushFn('comment',userId)}><MessageCircle /></ActionIcon>
                         <ActionIcon onClick={() => routerPushFn('message',userId)}><Send /></ActionIcon>

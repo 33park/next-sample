@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import { ChevronLeft } from 'lucide-react';
+import { theme } from '@/style/styles/theme'
 
 interface routerProps{
     routerPath:string;
@@ -20,7 +21,7 @@ export default function routerFnBtn({routerPath}:routerProps) {
     }
 
     return (
-        <HistoryBack onClick={()=>routerFn(routerPath)}><ChevronLeft stroke={'black'}/></HistoryBack>
+        <HistoryBack onClick={()=>routerFn(routerPath)}><ChevronLeft stroke={theme.colors.black}/></HistoryBack>
     )
 }
 const HistoryBack = styled.button`

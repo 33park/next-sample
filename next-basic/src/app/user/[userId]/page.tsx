@@ -4,9 +4,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { Images  } from 'lucide-react';
 import { styled } from 'styled-components'
 import { flexBox, offSet } from '@/style/styles/common'
-//layout component
-import LayoutHeader from "@/app/component/Instagram/layout/Header"
-import LayoutGNB from "@/app/component/Instagram/layout/GNB"
+
 //content component
 import RouterBack from "@/app/component/button/RouterBack"
 import ContentHead from "@/app/component/Instagram/profile/Head"
@@ -100,7 +98,7 @@ export default function UserDetailPage() {
                 ))}
             </GalleryTable>
             {/* //content */}
-            <LayoutGNB></LayoutGNB>
+           
 		</MainContainer>
 	)
 }
