@@ -5,9 +5,38 @@ import { styled } from 'styled-components'
 import Link from 'next/link';
 import { theme } from '@/style/styles/theme'
 import { flexBox, offSet } from '@/style/styles/common'
+import { Send } from 'lucide-react';
 
 interface CommentProps {
-    touchButton: ()=>void;
+    inputValue: string;
+    touchButton: () => void;
+    handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export default function CommentSection({inputValue, touchButton, handleInputChange}:CommentProps) {
+    return (
+        <>
+            <CommentContainer>
+                <UserTouchArea>
+                    <button type="button" onClick={touchButton}></button>
+                </UserTouchArea>
+                <div>contentSec</div>
+                <WriteArea>
+                    <UserIcon>
+                        <img src="/images/user/1000000chris/_profile.jpg" alt=""/>
+                    </UserIcon>
+                    <UserComment>
+                        <input 
+                            type="text" 
+                            value={inputValue} 
+                            onChange={handleInputChange}/>
+                    </UserComment>
+                    <button type="submit"><Send /></button>
+                </WriteArea>
+            </CommentContainer>
+
+        </>
+    )
 }
 
 const CommentContainer = styled.section`
@@ -58,32 +87,10 @@ const UserComment = styled.label`
     input {
         width: 100%;
         height: 4rem;
-        background-color: ${theme.colors.white};
-        box-sizing: border-box;
+        padding: 0 1.4rem;
         border-radius: 5rem;
+        background-color: ${theme.colors.white};
         border: 1px solid ${theme.colors.gray};
+        box-sizing: border-box;
     }
 `
-
-export default function CommentSection({touchButton}:CommentProps) {
-    return (
-        <>
-            <CommentContainer>
-                <UserTouchArea>
-                    <button type="button" onClick={touchButton}></button>
-                </UserTouchArea>
-                <div>contentSec</div>
-                <WriteArea>
-                    <UserIcon>
-                        <img src="/images/user/1000000chris/_profile.jpg" alt=""/>
-                    </UserIcon>
-                    <UserComment>
-                        <input type="text" name="" id="" value=""/>
-                    </UserComment>
-                    <button type="submit">보내기</button>
-                </WriteArea>
-            </CommentContainer>
-
-        </>
-    )
-}
