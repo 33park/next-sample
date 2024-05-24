@@ -6,10 +6,11 @@ import { styled } from 'styled-components'
 import { flexBox, offSet } from '@/style/styles/common'
 
 //content component
-import RouterBack from "@/app/component/button/RouterBack"
-import ContentHead from "@/app/component/Instagram/profile/Head"
-import FinderList from "@/app/component/Instagram/profile/Finder"
-import TabNav from "@/app/component/Instagram/profile/Tab"
+import LayoutHeader from '@/app/_component/layout/Header'
+import RouterBack from "@/app/_component/button/RouterBack"
+import ContentHead from "@/app/_component/profile/Head"
+import FinderList from "@/app/_component/profile/Finder"
+import TabNav from "@/app/_component/profile/Tab"
 //data
 import boardData from "../../../../public/api/boardData"
 
@@ -103,9 +104,8 @@ export default function UserDetailPage() {
 	)
 }
 
-const MainContainer = styled.main`
-    max-width: 46rem;
-    margin: 0 auto;
+const MainContainer = styled.section`
+
 `
 
 const ContentFinder = styled.section`

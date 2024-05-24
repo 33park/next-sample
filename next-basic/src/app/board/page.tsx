@@ -3,9 +3,9 @@
 import React,{useState, useEffect} from 'react'
 import { styled } from 'styled-components'
 import { useRouter } from 'next/navigation';
-// import LayoutGNB from "@/app/component/Instagram/layout/GNB"
-import Instargram from '@/app/component/Instargram'
+import Instargram from '@/app/_component/Instargram'
 import boardData from "../../../public/api/boardData"
+import FooterGnb from '@/app/_component/layout/GNB'
 
 export default function Board() {
     const router = useRouter();
@@ -33,6 +33,7 @@ export default function Board() {
 
     return (
         <>
+            <FooterGnb userId={''}/>
             <UserBoardContainer>
                 {boardItems.map((data, index) => (
                     <Instargram
@@ -54,11 +55,11 @@ export default function Board() {
     );
 }
 
+
 const UserBoardContainer = styled.ul`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    max-width: 46rem;
     margin: 0 auto;
 `

@@ -1,12 +1,12 @@
-'use client'
+import React from 'react';
+import { AppProps } from 'next/app';
+import RootLayout from './layout';
 
-import React from 'react'
 
-
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }:AppProps ) {
     return (
-        <>
+        <RootLayout>
             <Component {...pageProps} />
-        </>
+        </RootLayout>
     );
 }

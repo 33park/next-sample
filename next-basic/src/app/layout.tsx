@@ -3,11 +3,14 @@
 import React, {Suspense} from 'react'
 import { Reset } from 'styled-reset'
 import { ThemeProvider } from 'styled-components'
-import GlobalNavigator from './component/GNB'
-import { GlobalStyles } from '../style/GlobalStyles'
-import { theme } from '../style/styles/theme'
+import GlobalNavigator from './_component/GNB'
+import { GlobalStyles } from '@/style/GlobalStyles'
+import { offSet } from '@/style/styles/common'
+import { theme } from '@/style/styles/theme'
 import { Noto_Sans_KR } from 'next/font/google'
-import Modal from './component/Modal'
+import { styled } from 'styled-components'
+import Modal from './_component/Modal'
+
 
 
 const notoSansKr = Noto_Sans_KR({
@@ -27,16 +30,27 @@ export default function RootLayout({
                 <html lang="ko">
                     <Reset/>
                     <GlobalStyles/>
-                    <body className={`${notoSansKr.className}`}>
-                        <GlobalNavigator/>
-                        {children}
-                        <Suspense fallback={<>Loading...</>}>
-                            <Modal/>
-                        </Suspense>
-                    </body> 
+                    <BodySection className={`${notoSansKr.className}`}>
+                        <MainSection>
+
+                            <GlobalNavigator/>
+                            {children}
+                            <Suspense fallback={<>Loading...</>}>
+                                <Modal title={'test header'}></Modal>
+                            </Suspense>
+                        </MainSection>
+                    </BodySection> 
                 </html>
             </ThemeProvider>
         );
 }
 
+const BodySection = styled.body`
+    ${offSet()};
+    max-width: 46rem;
+    margin: 0 auto;
+`
 
+const MainSection = styled.main`
+
+`

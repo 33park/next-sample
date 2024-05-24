@@ -1,6 +1,7 @@
 "use client";
 import {useSearchParams, usePathname} from "next/navigation";
 import Link from "next/link";
+
 interface ModalProps {
     title: string,
 }
