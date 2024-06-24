@@ -42,8 +42,11 @@ export default function Board() {
     }
 
     const touchDown = () => {
-        console.log('test')
         setCommentHeight('60vh');
+        if(commentHeight == '60vh'){
+            setCommentHeight('');
+            setHandleComment(false);
+        }
     }
 
     const handleInputChange = () => {
@@ -52,7 +55,7 @@ export default function Board() {
     return (
         <>
             {handleComment ? (
-                <CommentSection  >
+                <>
                     <CommentContainer style={{height: commentHeight}}>
                         <UserTouchArea>
                             <button type="button" onClick={touchDown}></button>
@@ -93,7 +96,7 @@ export default function Board() {
                         </WriteArea>
                     </CommentContainer>
                     {/* <DimmedBg/> */}
-                </CommentSection>
+                </>
             ) : null}
             <FooterGnb userId={''}/>
             <UserBoardContainer>
@@ -126,11 +129,6 @@ const UserBoardContainer = styled.ul`
     flex-direction: column;
     margin: 0 auto;
 `
-const CommentSection = styled.div`
-    ${offSet()};
-    transition: height 0.3s ease;
-`;
-
 const DimmedBg = styled.div`
     ${offSet({position: 'fixed', bottom:'0', left: '0'})}
     width: 100%;
@@ -143,12 +141,14 @@ const DimmedBg = styled.div`
 
 
 const CommentContainer = styled.section`
-    display: block;
-    z-index: 2;
+    ${offSet({position: 'fixed', bottom:'0', left: '50%'})};
     width: 100%;
     max-width: 46rem;
-    height: 100%;
+    height: 100vh;
+    transform: translateX(-50%);
     background-color: ${theme.colors.white};
+    transition: height .3s ease;
+    z-index: 2;
 `
 
 const UserTouchArea = styled.div`
@@ -216,7 +216,9 @@ const CommentTitle = styled.div`
 
 const RegistCommentSec = styled.section`
     display: block;
-    height: calc(100vh - 12.8rem);
+    height: 100%;
+    max-height: calc(100% - 12.8rem);
+    background-color: ${theme.colors.white};
     
     > div {
         flex:none;
