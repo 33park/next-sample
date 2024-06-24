@@ -5,25 +5,27 @@ import { styled } from 'styled-components'
 import Link from 'next/link';
 import { theme } from '@/style/styles/theme'
 import { flexBox, offSet } from '@/style/styles/common'
-import { Send } from 'lucide-react';
+
 
 interface CommentProps {
+    userDataId: string;
     inputValue: string;
     touchButton: () => void;
     handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function CommentSection({inputValue, touchButton, handleInputChange}:CommentProps) {
+export default function CommentSection({userDataId, inputValue, touchButton, handleInputChange}:CommentProps) {
     return (
         <>
             <CommentContainer>
                 <UserTouchArea>
                     <button type="button" onClick={touchButton}></button>
                 </UserTouchArea>
-                <div>contentSec</div>
+                <CommentTitle>댓글</CommentTitle>
+                <RegistCommentSec>contentSec</RegistCommentSec>
                 <WriteArea>
                     <UserIcon>
-                        <img src="/images/user/1000000chris/_profile.jpg" alt=""/>
+                        <img src={`/images/user/${userDataId}/_profile.jpg`} alt={userDataId}/>
                     </UserIcon>
                     <UserComment>
                         <input 
@@ -93,4 +95,18 @@ const UserComment = styled.label`
         border: 1px solid ${theme.colors.gray};
         box-sizing: border-box;
     }
+`
+
+const CommentTitle = styled.div`
+    display: block;
+    width: 100%;
+    line-height: 4rem;
+    text-align: center;
+    font-size: 1.6rem;
+    background-color: ${theme.colors.white};
+`
+
+const RegistCommentSec = styled.section`
+    display: block;
+    height: calc(100vh - 12.8rem);
 `

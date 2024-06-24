@@ -1,13 +1,16 @@
-// interface DataTypeProps {
-//     userId:string;
-//     userName:string;
-//     content:string;
-//     isLiked:Boolean;
-//     likedCount:number;
-//     userFollower:number;
-//     userFollowing:number;
-//     upLoadedImage:string[];
-// }
+/**
+ * interface DataTypeProps {
+    userId:string;
+    userName:string;
+    content:string;
+    isLiked:Boolean;
+    likedCount:number;
+    userFollower:number;
+    userFollowing:number;
+    upLoadedImage:string[];
+    }
+*/
+
 
 const COMMENTDATA = [
 	{
