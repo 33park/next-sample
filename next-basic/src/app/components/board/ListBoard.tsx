@@ -1,7 +1,12 @@
 // components/ListBoard.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { ListItem } from '@/app/interfaces/ListBoard';
+
+interface ListItem {
+  id: number;
+  title: string;
+  description: string;
+}
 
 interface ListBoardProps {
   items: ListItem[];
