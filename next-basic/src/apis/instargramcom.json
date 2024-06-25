@@ -1,0 +1,136 @@
+// https://developers.imiconnect.io/reference/instagram-api
+
+
+
+
+{
+    "uuid": "b0715742-20ba-4de6-bb8b-d2feb85e6b05",
+    "lastMigration": 29,
+    "name": "Instagram API",
+    "endpointPrefix": "v1",
+    "latency": 0,
+    "port": 3000,
+    "hostname": "",
+    "routes": [
+      {
+        "uuid": "dc289078-7c3e-4df2-a938-9caa739bd8d9",
+        "documentation": "Get recent media from a custom geo-id.",
+        "method": "get",
+        "endpoint": "geographies/{geo-id}/media/recent",
+        "responses": [
+          {
+            "uuid": "fabb0eef-cd7e-4bb7-b3f0-6314dd808f89",
+            "body": "{\n  \"data\": [\n    {\n      \"attribution\": \"\",\n      \"caption\": {\n        \"created_time\": \"\",\n        \"from\": {\n          \"full_name\": \"\",\n          \"id\": \"\",\n          \"profile_picture\": \"\",\n          \"username\": \"\"\n        },\n        \"id\": \"\",\n        \"text\": \"\"\n      },\n      \"comments\": {\n        \"count\": {{faker 'number.int' max=99999}},\n        \"data\": [\n          {\n            \"created_time\": \"\",\n            \"from\": {\n              \"full_name\": \"\",\n              \"id\": \"\",\n              \"profile_picture\": \"\",\n              \"username\": \"\"\n            },\n            \"id\": \"\",\n            \"text\": \"\"\n          }\n        ]\n      },\n      \"created_time\": \"\",\n      \"filter\": \"\",\n      \"id\": \"\",\n      \"images\": {\n        \"low_resolution\": {\n          \"height\": {{faker 'number.int' max=99999}},\n          \"url\": \"\",\n          \"width\": {{faker 'number.int' max=99999}}\n        },\n        \"standard_resolution\": {\n          \"height\": {{faker 'number.int' max=99999}},\n          \"url\": \"\",\n          \"width\": {{faker 'number.int' max=99999}}\n        },\n        \"thumbnail\": {\n          \"height\": {{faker 'number.int' max=99999}},\n          \"url\": \"\",\n          \"width\": {{faker 'number.int' max=99999}}\n        }\n      },\n      \"likes\": {\n        \"count\": {{faker 'number.int' max=99999}},\n        \"data\": [\n          {\n            \"full_name\": \"\",\n            \"id\": \"\",\n            \"profile_picture\": \"\",\n            \"username\": \"\"\n          }\n        ]\n      },\n      \"link\": \"\",\n      \"location\": {\n        \"id\": \"\",\n        \"latitude\": {{faker 'number.float'}},\n        \"longitude\": {{faker 'number.float'}},\n        \"name\": \"\"\n      },\n      \"tags\": [\n        \"\"\n      ],\n      \"type\": \"{{oneOf (array 'image' 'video')}}\",\n      \"user\": {\n        \"full_name\": \"\",\n        \"id\": \"\",\n        \"profile_picture\": \"\",\n        \"username\": \"\"\n      },\n      \"user_has_liked\": {{faker 'datatype.boolean'}},\n      \"users_in_photo\": [\n        {\n          \"position\": {\n            \"x\": {{faker 'number.float'}},\n            \"y\": {{faker 'number.float'}}\n          },\n          \"user\": {\n            \"full_name\": \"\",\n            \"id\": \"\",\n            \"profile_picture\": \"\",\n            \"username\": \"\"\n          }\n        }\n      ],\n      \"videos\": {\n        \"low_resolution\": {\n          \"height\": {{faker 'number.int' max=99999}},\n          \"url\": \"\",\n          \"width\": {{faker 'number.int' max=99999}}\n        },\n        \"standard_resolution\": {\n          \"height\": {{faker 'number.int' max=99999}},\n          \"url\": \"\",\n          \"width\": {{faker 'number.int' max=99999}}\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"code\": {{faker 'number.int' max=99999}}\n  },\n  \"pagination\": {\n    \"next_max_id\": \"\",\n    \"next_url\": \"\"\n  }\n}",
+            "latency": 0,
+            "statusCode": 200,
+            "label": "List of recent media entries from a geography subscription.",
+            "headers": [{ "key": "Content-Type", "value": "application/json" }],
+            "bodyType": "INLINE",
+            "filePath": "",
+            "databucketID": "",
+            "sendFileAsBody": false,
+            "rules": [],
+            "rulesOperator": "OR",
+            "disableTemplating": false,
+            "fallbackTo404": false,
+            "default": true,
+            "crudKey": "id"
+          }
+        ],
+        "enabled": true,
+        "responseMode": null,
+        "type": "http"
+      },
+      {
+        "uuid": "5ee1639b-af0f-40c3-856e-d191a97d9875",
+        "documentation": "Search for a location by geographic coordinate.",
+        "method": "get",
+        "endpoint": "locations/search",
+        "responses": [
+          {
+            "uuid": "3f73e105-ab84-4851-9ce1-e87a41de2b03",
+            "body": "{\n  \"data\": [\n    {\n      \"id\": \"\",\n      \"latitude\": {{faker 'number.float'}},\n      \"longitude\": {{faker 'number.float'}},\n      \"name\": \"\"\n    }\n  ],\n  \"meta\": {\n    \"code\": {{faker 'number.int' max=99999}}\n  }\n}",
+            "latency": 0,
+            "statusCode": 200,
+            "label": "List of found locations.",
+            "headers": [{ "key": "Content-Type", "value": "application/json" }],
+            "bodyType": "INLINE",
+            "filePath": "",
+            "databucketID": "",
+            "sendFileAsBody": false,
+            "rules": [],
+            "rulesOperator": "OR",
+            "disableTemplating": false,
+            "fallbackTo404": false,
+            "default": true,
+            "crudKey": "id"
+          }
+        ],
+        "enabled": true,
+        "responseMode": null,
+        "type": "http"
+      },
+    ],
+    "proxyMode": false,
+    "proxyHost": "",
+    "proxyRemovePrefix": false,
+    "tlsOptions": {
+      "enabled": false,
+      "type": "CERT",
+      "pfxPath": "",
+      "certPath": "",
+      "keyPath": "",
+      "caPath": "",
+      "passphrase": ""
+    },
+    "cors": true,
+    "headers": [],
+    "proxyReqHeaders": [{ "key": "", "value": "" }],
+    "proxyResHeaders": [{ "key": "", "value": "" }],
+    "data": [],
+    "folders": [],
+    "rootChildren": [
+      { "type": "route", "uuid": "dc289078-7c3e-4df2-a938-9caa739bd8d9" },
+      { "type": "route", "uuid": "5ee1639b-af0f-40c3-856e-d191a97d9875" },
+    ]
+  }
+
+
+
+//   uuid: API 객체의 고유 식별자입니다. 각 API 객체는 uuid를 통해 구분됩니다.
+
+// lastMigration: 마지막으로 이 API가 마이그레이션된 버전입니다. 숫자 형태로 표현됩니다.
+
+// name: API의 이름입니다. 예제에서는 "Instagram API"로 설정되어 있습니다.
+
+// endpointPrefix: API의 엔드포인트 접두사입니다. 예를 들어 "v1"과 같은 형태로 API 엔드포인트를 구성하는 데 사용될 수 있습니다.
+
+// latency: API의 응답 지연 시간입니다. 여기서는 0으로 설정되어 있으며, 일반적으로 밀리초 단위로 응답 지연 시간을 나타냅니다.
+
+// port: API가 수신 대기하는 포트 번호입니다. 예제에서는 3000으로 설정되어 있습니다.
+
+// hostname: API 호스트 이름입니다. 비어 있으므로 특정 호스트를 명시적으로 지정하지 않았음을 나타냅니다.
+
+// routes: API의 각 엔드포인트 및 해당 엔드포인트에 대한 설정을 포함하는 배열입니다.
+
+// uuid: 각 route의 고유 식별자입니다.
+// documentation: 해당 엔드포인트에 대한 설명입니다.
+// method: HTTP 메서드 (GET, POST 등)입니다.
+// endpoint: 실제 요청을 처리하는 엔드포인트 경로입니다.
+// responses: 각 엔드포인트의 응답 설정을 포함하는 배열입니다.
+// uuid: 각 응답의 고유 식별자입니다.
+// body: 응답 본문의 구조와 예시 데이터입니다.
+// latency: 응답 지연 시간입니다.
+// statusCode: HTTP 응답 상태 코드입니다.
+// label: 응답에 대한 레이블이나 설명입니다.
+// headers: 응답에 포함될 헤더 설정입니다.
+// proxyMode, proxyHost, proxyRemovePrefix: 프록시 관련 설정입니다. 이 API가 프록시 모드인지, 프록시 호스트 및 프리픽스를 제거할지 여부를 나타냅니다.
+
+// tlsOptions: TLS(Transport Layer Security) 옵션 설정입니다. SSL 인증서와 관련된 설정을 포함할 수 있습니다.
+
+// cors: Cross-Origin Resource Sharing (CORS) 설정을 나타내며, API 요청에 대한 클라이언트의 웹 브라우저 제한을 관리합니다.
+
+// headers, proxyReqHeaders, proxyResHeaders: API 요청 및 응답에 포함될 헤더 설정입니다.
+
+// data, folders, rootChildren: API의 데이터와 관련된 항목을 구성하는 배열들입니다. 각각 데이터 항목, 폴더, 루트 자식 노드를 나타냅니다.
+
