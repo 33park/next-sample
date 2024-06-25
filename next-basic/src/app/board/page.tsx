@@ -1,58 +1,33 @@
 'use client'
 
-import React,{useState, useEffect} from 'react'
-import { styled } from 'styled-components'
-import Instargram from '@/app/component/Instargram'
-import boardData from "../../../public/api/boardData"
+import React, { useState } from 'react';
+import ListBoard from '@/app/components/board/ListBoard';
+import { ListItem } from '@/app/interfaces/ListBoard';
 
-export default function Board() {
-    const [boardItems, setBoardItems] = useState([]);
+const dummyData: ListItem[] = [
+  { id: 1, title: 'Item 1', description: 'Description for item 1' },
+  { id: 2, title: 'Item 2', description: 'Description for item 2' },
+  { id: 3, title: 'Item 3', description: 'Description for item 3' },
+];
 
-    // 컴포넌트가 마운트될 때 JSON 데이터를 가져와서 boardItems 상태 변수에 설정합니다.
-    useEffect(() => {
-        setBoardItems(boardData);
-    }, []);
+const Home: React.FC = () => {
+  const [items, setItems] = useState<ListItem[]>(dummyData);
 
-    const handleLikeToggle = (itemId) => {
-        setBoardItems((prevBoardItems) => {
-            // 아이템의 좋아요 상태를 토글하여 새로운 배열을 생성합니다.
-            return prevBoardItems.map((item, index) => {
-                if (index === itemId) {
-                    // isLiked 값에 따라 likedCount를 반대로 계산합니다.
-                    const newLikedCount = item.isLiked ? item.likedCount + 1 : item.likedCount - 1;
-                    return { ...item, isLiked: !item.isLiked, likedCount: newLikedCount };
-                }
-                return item;
-            });
-        });
-    };
+  const handleDelete = (id: number) => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
 
-    return (
-        <>
-            <UserBoardContainer>
-                {boardItems.map((data, index) => (
-                    <Instargram
-                        key={index}
-                        itemId={index}
-                        userId={data.userId}
-                        userName={data.userName}
-                        content={data.content}
-                        isLiked={data.isLiked}
-                        likedCount={data.likedCount}
-                        upLoadedImage={data.upLoadedImage}
-                        onLikeToggle={() => handleLikeToggle(index)}
-                    />
-                ))}
-            </UserBoardContainer>
-        </>
-    );
-}
+  const handleModify = (id: number) => {
+    // Implement modify functionality as needed
+    console.log(`Modify item with ID ${id}`);
+  };
 
-const UserBoardContainer = styled.ul`
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
-    max-width: 46rem;
-    margin: 0 auto;
-`
+  return (
+    <div>
+      <h1>List Board Example</h1>
+      <ListBoard items={items} onDelete={handleDelete} onModify={handleModify} />
+    </div>
+  );
+};
+
+export default Home;
