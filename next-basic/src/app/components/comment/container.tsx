@@ -1,11 +1,12 @@
-import React, { Children } from 'react';
+import React, { Children, ReactNode } from 'react';
 import { Ellipsis } from 'lucide-react';
 import { styled } from 'styled-components';
 import { theme } from '@/style/styles/theme';
 import { flexBox, offSet } from '@/style/styles/common';
 
+
 interface CommentContainerProps {
-    children: ReactNode;
+    Children: ReactNode;
     commentHeight: string;
     touchDown: () => void;
 }
@@ -14,18 +15,22 @@ const CommentContainerComponent: React.FC<CommentContainerProps> = ({
     commentHeight,
     touchDown,
     children,
-    }) => {
+    }): React.JSX.Element => {
     return (
-        <CommentContainer style={{ height: commentHeight }}>
-            <UserTouchArea>
-                <button type="button" onClick={touchDown}></button>
-            </UserTouchArea>
-            <CommentTitle>
-                댓글
-                <button type="button"><Ellipsis /></button>
-            </CommentTitle>
-            {children}
-        </CommentContainer>
+        <>
+            <CommentContainer style={{ height: commentHeight }}>
+                <UserTouchArea>
+                    <button type="button" onClick={touchDown}></button>
+                </UserTouchArea>
+                <CommentTitle>
+                    댓글
+                    <button type="button"><Ellipsis /></button>
+                </CommentTitle>
+                <CommentWrapper>
+                    {children}
+                </CommentWrapper>
+            </CommentContainer>
+        </>
     );
 };
 
@@ -49,8 +54,8 @@ const UserTouchArea = styled.div`
     height: 2.4rem;
 
     button {
-        width: 8rem;
-        height: 1rem;
+        width: 6.4rem;
+        height: 0.8rem;
         border-radius: 1rem;
         background-color: ${theme.colors.gray};
     }
@@ -72,3 +77,9 @@ const CommentTitle = styled.div`
         ${flexBox({ justify: 'center' })};
     }
 `;
+
+const CommentWrapper = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: ${theme.colors.white};
+`

@@ -1,19 +1,20 @@
 'use client'
 
-import React,{useRef, useState, useEffect} from 'react'
-import { styled } from 'styled-components'
+import React, { useRef, useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 
 //component
-import Instargram from '@/app/components/Instargram'
-import FooterGnb from '@/app/components/layout/GNB'
-import CommentContainer from '@/app/components/comment/container'
-import CommentReply from '@/app/components/comment/reply'
-import CommentInput from '@/app/components/comment/input'
+import Instargram from '@/app/components/Instargram';
+import FooterGnb from '@/app/components/layout/GNB';
+import CommentContainer from '@/app/components/comment/container';
+import CommentReply from '@/app/components/comment/reply';
+import CommentInput from '@/app/components/comment/input';
+import ReplyItemComponent from '@/app/components/comment/reply';
 
 //apis
-import boardData from "../../apis/boardData"
-import replayData from "../../apis/replayData"
+import boardData from "../../apis/boardData";
+import replayData from "../../apis/replayData";
 
 export default function Board() {
     const router = useRouter();
@@ -43,44 +44,52 @@ export default function Board() {
 
     const handleUserProfile = (userId) => {
         router.push(`/user/${userId}`);
-    }
+    };
 
     const showCommentSection = () => {
-        setHandleComment(handleComment => !handleComment)
-    }
+        setHandleComment((handleComment) => !handleComment);
+    };
 
     const touchDown = () => {
         setCommentHeight('60vh');
-        if(commentHeight == '60vh'){
+        if (commentHeight === '60vh') {
             setCommentHeight('');
             setHandleComment(false);
         }
-    }
+    };
 
-    const handleReply = ()=>{
+    const handleReply = () => {
         replyInput.current.focus();
-    }
+    };
 
-    const hideReplyFn = ()=>{
+    const hideReplyFn = () => {
         setHideReply(confirm('이 덧글을 정말 숨길까요?'));
-        console.log(hideReply)
-    }
+        console.log(hideReply);
+    };
 
-    const handleInputChange = () => {
-    }
-
+    const handleInputChange = () => { };
 
     return (
         <>
             {handleComment && (
                 <>
-                    <CommentInput/>
-                    <CommentContainer>
-                        <CommentReply/>
+                    <CommentInput />
+                    <CommentContainer 
+                    Children={undefined} 
+                    commentHeight={commentHeight} 
+                    touchDown={touchDown}>
+                        {replayItems.map((item, index) => (
+                            <ReplyItemComponent
+                                key={index}
+                                userData={item}
+                                handleReply={handleReply}
+                                hideReplyFn={hideReplyFn}
+                            />
+                        ))}
                     </CommentContainer>
                 </>
             )}
-            <FooterGnb userId={''}/>
+            <FooterGnb userId={''} />
             <UserBoardContainer>
                 {boardItems.map((data, index) => (
                     <Instargram
@@ -95,7 +104,6 @@ export default function Board() {
                         onUserRoute={() => handleUserProfile(data.userId)}
                         onLikeToggle={() => handleLikeToggle(index)}
                         onOpenComment={() => showCommentSection()}
-                        // onEdit={() => handleUserProfile(data.userId)}
                     />
                 ))}
             </UserBoardContainer>
@@ -103,13 +111,10 @@ export default function Board() {
     );
 }
 
-
 const UserBoardContainer = styled.ul`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     margin: 0 auto;
-`
-
-
+`;

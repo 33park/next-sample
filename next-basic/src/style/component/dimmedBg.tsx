@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { offSet } from '@/style/styles/common'
+import { theme } from '@/style/styles/theme';
 
-export default function dimmedBg() {
+export default function DimmedBg() {
   return (
-    <DimmedBg></DimmedBg>
+    <Dimmed></Dimmed>
   )
 }
 
-const DimmedBg = styled.div`
+const Dimmed = styled.div`
     ${offSet({position: 'fixed', bottom:'0', left: '0'})}
     width: 100%;
     height: 100%;
     background-color: ${theme.colors.black};
-    opacity: 0.9;
+    opacity: 0.3;
 `

@@ -1,52 +1,105 @@
+import React, { ReactNode } from "react";
+import { styled } from 'styled-components';
+import { theme } from '@/style/styles/theme';
+import { flexBox, offSet } from '@/style/styles/common';
+import { Heart } from 'lucide-react';
+
+interface UserDataProps {
+    userId: number;
+    registDate: string;
+    userContent: string;
+    replies: UserDataProps[]; // 중첩된 덧글 데이터
+}
+
 interface ReplyItemProps {
-    userData: {
-        userId:number;
-    };
-    
+    userData: UserDataProps;
     handleReply: () => void;
     hideReplyFn: () => void;
 }
 
 const ReplyItemComponent: React.FC<ReplyItemProps> = ({
+    userData,
     handleReply,
     hideReplyFn,
-}) => {
+}): React.JSX.Element => {
+
+    console.log(userData)
+
     return (
-        <ReplyItem key={index}>
-            <div>
-                <UserIcon href={`/user/${data.reply.userId}`}>
-                    <img
-                        src={`/images/user/${data.reply.userId}/_profile.jpg`}
-                        alt={`${data.reply.userId}`}
-                    />
-                </UserIcon>
-            </div>
+        <ReplyItem>
+            <UserIcon href={`/user/${userData.userId}`}>
+                <img
+                    src={`/images/user/${userData.userId}/_profile.jpg`}
+                    alt={`${userData.userId}`}
+                />
+            </UserIcon>
             <CommentContentWrap>
                 <CommentUserId>
-                    <strong>{data.reply.userId}</strong>
-                    <span>{data.reply.registDate}</span>
+                    <strong>{userData.userId}</strong>
+                    <span>{userData.registDate}</span>
                 </CommentUserId>
-                <CommentUserContent>{data.reply.registContent}</CommentUserContent>
+                <CommentUserContent>
+                    {userData.userContent}
+                </CommentUserContent>
                 <CommentBtnWrap>
                     <div>
-                        <button type='button' onClick={handleReply}>
+                        <button type="button" onClick={handleReply}>
                             답글달기
                         </button>
-                        <button type='button' onClick={hideReplyFn}>
+                        <button type="button" onClick={hideReplyFn}>
                             숨기기
                         </button>
                     </div>
-                    <ShowMoreBtn>답글 1개 더보기</ShowMoreBtn>
-                    {data.reply.reMentioned && (
-                        data.reply.reMentioned.map((reply, idx) => (
-                            <ReplyItem key={idx}>
-                            {/* reMentioned에 대한 내용 반복 */}
-                            </ReplyItem>
-                        ))
+                    {/* {userData.replies > 0 && (
+                        <ShowMoreBtn>답글 {userData.replies.length}개 더보기</ShowMoreBtn>
                     )}
-            </CommentBtnWrap>
+                    {userData.replies > 0 && userData.replies.map((reply, idx) => (
+                        <ReplyItemComponent
+                            key={idx}
+                            userData={reply}
+                            handleReply={handleReply}
+                            hideReplyFn={hideReplyFn}
+                        />
+                    ))} */}
+                </CommentBtnWrap>
             </CommentContentWrap>
-            <div><Heart/></div>
+            <div><Heart /></div>
         </ReplyItem>
     );
 };
+
+export default ReplyItemComponent;
+
+const ReplyItem = styled.div`
+    ${flexBox()}
+    padding: 1rem 2rem;
+`;
+
+const UserIcon = styled.a`
+    > img {
+        display: inline-block;
+        border-radius: 4rem;
+        width: 4rem;
+        height: 4rem;
+    }
+`;
+
+const CommentContentWrap = styled.div`
+    
+`;
+
+const CommentUserId = styled.div`
+    
+`;
+
+const CommentUserContent = styled.div`
+    
+`;
+
+const CommentBtnWrap = styled.div`
+    
+`;
+
+const ShowMoreBtn = styled.div`
+    
+`;
