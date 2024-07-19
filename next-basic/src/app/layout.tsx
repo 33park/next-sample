@@ -3,7 +3,6 @@
 import React from 'react'
 import { Reset } from 'styled-reset'
 import { ThemeProvider } from 'styled-components'
-import GlobalNavigator from './component/GNB'
 import { GlobalStyles } from '../style/GlobalStyles'
 import { theme } from '../style/styles/theme'
 import { Noto_Sans_KR } from 'next/font/google'
@@ -26,7 +25,6 @@ export default function RootLayout({
                     <Reset/>
                     <GlobalStyles/>
                     <body className={`${notoSansKr.className}`}>
-                        <GlobalNavigator/>
                         {children}
                     </body> 
                 </html>

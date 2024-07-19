@@ -1,0 +1,48 @@
+[
+    {
+        "userId": "user123",
+        "registPwd": "password123",
+        "postId": 10000001,
+        "postType": "photo",
+        "title": "Beautiful Sunset",
+        "visibleType": "public",
+        "commentType": "Y",
+        "url": "10000001",
+        "registDate": "20240819110325",
+        "bookmarkCount": 0,
+        "likeCount": 0,
+        "commentList": [
+        {
+            "userId": "commenter1",
+            "registPwd": "password123",
+            "comment": "Amazing!",
+            "registDate": "20240920120140",
+            "likeCount": 0,
+            "dislikeCount": 0
+        }
+        ]
+    },
+    {
+        "userId": "user456",
+        "registPwd": "password456",
+        "postId": 10000002,
+        "postType": "video",
+        "title": "Funny Cat Video",
+        "visibleType": "public",
+        "commentType": "Y",
+        "url": "10000002",
+        "registDate": "20240819120325",
+        "bookmarkCount": 0,
+        "likeCount": 0,
+        "commentList": [
+        {
+            "userId": "commenter2",
+            "registPwd": "password456",
+            "comment": "Hilarious!",
+            "registDate": "20240920130140",
+            "likeCount": 0,
+            "dislikeCount": 0
+        }
+        ]
+    }
+]
