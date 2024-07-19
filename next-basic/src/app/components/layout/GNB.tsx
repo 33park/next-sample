@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { styled } from 'styled-components'
-import { Home, Search, SquarePlus, SquarePlay   } from 'lucide-react';
+import { Home, Search, SquarePlus, SquarePlay, CircleUserRound } from 'lucide-react';
 import Link from 'next/link';
 import { theme } from '@/style/styles/theme'
 import { flexBox, offSet } from '@/style/styles/common'
@@ -18,7 +18,10 @@ export default function GNB({userId}:FooterProps) {
         <Link href='/'><Search /></Link>
         <Link href='/'><SquarePlus /></Link>
         <Link href='/'><SquarePlay /></Link>
-        {/* <Link href='/'><i><img src={`/images/user/${userId}/_profile.jpg`} alt={userId} /></i></Link> */}
+        <Link href='/'>
+            <CircleUserRound/>
+            {/* <i><img src={`/images/user/${userId}/_profile.jpg`} alt={userId} /></i> */}
+        </Link>
     </FooterSection>
   )
 }

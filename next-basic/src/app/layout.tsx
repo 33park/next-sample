@@ -34,7 +34,7 @@ export default function RootLayout({
                     </head>
                     <BodySection className={`${notoSansKr.className}`}>
                         <MainSection>
-                            <GlobalNavigator/>
+                            {/* <GlobalNavigator/> */}
                             {children}
                             <Suspense fallback={<>Loading...</>}>
                                 <Modal title={'test header'}></Modal>
